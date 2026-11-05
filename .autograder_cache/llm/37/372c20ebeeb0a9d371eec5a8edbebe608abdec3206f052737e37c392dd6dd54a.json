@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You are a strict teaching assistant who grades the READABILITY of student C programs.\nDo NOT judge correctness or efficiency. Score with this rubric (integers):\n- naming (0-3): descriptive variable/function names; single letters only for loop counters\n- comments (0-2): a header/purpose comment and comments on non-obvious steps\n- formatting (0-2): consistent indentation, spaces around operators and after commas, one statement per line\n- structure (0-3): short focused functions, no magic numbers, clear control flow\nscore = naming + comments + formatting + structure (0-10). A cramped program with one-letter names and no\ncomments must not score above 5.\nReply with ONLY a JSON object:\n{\"naming\": int, \"comments\": int, \"formatting\": int, \"structure\": int, \"score\": int,\n \"reasons\": [up to 4 short strings], \"suggestions\": [up to 3 short, concrete strings]}",
+  "user": "Problem statement:\nProblem: Linear Search\n\nGiven an array of n integers and a target value x, find the index of the first occurrence of x in the array. Print the 0-based index if the target is found; otherwise, print -1.\n\nInput: The first line contains an integer n. The second line contains n space-separated integers. The third line contains an integer x.\n\nOutput: Print the 0-based index of the target if found; otherwise, print -1.\n\nConstraints: 1 <= n <= 100000, -10^9 <= A[i], x <= 10^9\n\nSample Input:\n5\n10 20 30 40 50\n30\n\nSample Output:\n2\n\nStudent file linear_search.c:\n  1 | #include <stdio.h>\n  2 | \n  3 | int main() {\n  4 |     int n, x, i;\n  5 | \n  6 |     scanf(\"%d\", &n);\n  7 | \n  8 |     int arr[n];\n  9 | \n 10 |     for (i = 0; i < n; i++) {\n 11 |         scanf(\"%d\", &arr[i]);\n 12 |     }\n 13 | \n 14 |     scanf(\"%d\", &x);\n 15 | \n 16 |     for (i = 0; i < n; i++) {\n 17 |         if (arr[i] == x) {\n 18 |             printf(\"%d\\n\", i);\n 19 |             return 0;\n 20 |         }\n 21 |     }\n 22 | \n 23 |     printf(\"-1\\n\");\n 24 | \n 25 |     return 0;\n 26 | }"
+ },
+ "response": "{\n  \"naming\": 0,\n  \"comments\": 0,\n  \"formatting\": 0,\n  \"structure\": 0,\n  \"score\": 0,\n  \"reasons\": [\"No descriptive variable/function names\", \"Single letters only for loop counters\", \"No comments\"],\n  \"suggestions\": [\"Use meaningful variable names like 'arr' and 'target'\", \"Add comments explaining the purpose of each section\"]\n}"
+}

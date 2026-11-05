@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:7b",
+  "temperature": 0.7,
+  "seed": 1,
+  "json": false,
+  "system": "You are a helpful programming assistant.",
+  "user": "Write a complete C program (C11) that solves the following problem. Reply with the code only.\n\nRead two integers on a single line separated by whitespace and print their sum followed by a newline.\n\nEach integer fits in a signed 32-bit int (-2147483648 .. 2147483647). The sum may not.\n\nSample input:\n7 5\n\nSample output:\n12"
+ },
+ "response": "```c\n#include <stdio.h>\n\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\n\", a + b);\n    return 0;\n}\n```"
+}

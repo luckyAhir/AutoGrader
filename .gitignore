@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.venv/
+.env
+.env.*
+!.env.example
+.DS_Store
+.playwright-mcp/
+*.o
+*.gcda
+*.gcno
+*.gcov
+a.out
+*.exe
+# programs and reports submitted through the browser interface
+uploads/
+reports/uploads/
+# NOTE: .autograder_cache/ is intentionally committed: it stores the LLM
+# verdicts that make the readability score reproducible.

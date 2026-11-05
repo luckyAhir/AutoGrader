@@ -1,0 +1,7 @@
+submission,grade,correctness,syntax,structure,modularity,logical,complexity,memory_safety,readability,originality,forbidden,flags
+sort_bubble.c,89.5,0.900,1.000,1.000,1.000,1.000,0.500,1.000,0.901,1.000,1.000,
+sort_llm_copy.c,77.7,0.800,0.800,0.780,0.759,0.878,1.000,0.550,0.675,0.000,1.000,memory_leak;suspected_online_or_llm_copy
+sort_merge.c,94.9,1.000,1.000,1.000,1.000,1.000,1.000,1.000,0.973,0.000,1.000,suspected_plagiarism
+sort_merge_copy.c,91.5,1.000,1.000,0.800,1.000,1.000,1.000,1.000,0.708,0.000,1.000,suspected_plagiarism
+sort_qsort_overflow.c,87.1,0.800,0.900,0.880,0.762,0.878,1.000,0.800,0.768,1.000,1.000,
+sort_selection_leak.c,74.6,0.800,0.800,0.780,0.313,0.875,0.500,0.750,0.624,1.000,1.000,memory_leak

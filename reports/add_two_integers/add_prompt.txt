@@ -1,0 +1,181 @@
+===== Grading report for add_prompt.c =====
+Overall grade: 57.9 / 100
+Problem: add_two_integers    Rules: problems/add_two_integers/rules.json (sha256:37503316a67c...)
+First pass: compiled=yes  smoke run=OK  suspected_infinite_loop=no
+
+Metric         Weight        Score  Contribution  Verdict
+correctness        20         0/20           0.0  0 of 10 tests pass
+syntax             10         9/10           9.0  -Wunused-result x1
+structure          10       7.8/10           7.8  single-block code (everything in main); no header comment o...
+modularity         10       3.8/10           3.8  only main() defined
+logical            10         0/10           0.0  fails: negatives, zero, int_overflow
+complexity         10        10/10          10.0  O(1) confirmed
+memory_safety      10        10/10          10.0  ASan/UBSan clean
+readability        10       7.2/10           7.2  no comments
+originality        10        10/10          10.0  max similarity 0.56, not flagged
+
+--- Where you failed ---
+Test 01  (WA)
+    INPUT:    7 5
+    EXPECTED: 12
+    GOT:      Enter two numbers: Sum = 12
+    WHY:      Your output contains extra text ('Enter two numbers: Sum') in addition to the
+              answer. The grader compares output exactly, so prompts such as "Enter two
+              numbers:" make every test fail.
+    FIX:      Print only what the statement asks for - no prompts, labels or messages.
+    reproduce: ./prog < add_prompt_counterexamples/CE-01.in
+Test 02  (WA)
+    INPUT:    0 0
+    EXPECTED: 0
+    GOT:      Enter two numbers: Sum = 0
+    WHY:      Your output contains extra text ('Enter two numbers: Sum') in addition to the
+              answer. The grader compares output exactly, so prompts such as "Enter two
+              numbers:" make every test fail.
+    FIX:      Print only what the statement asks for - no prompts, labels or messages.
+    reproduce: ./prog < add_prompt_counterexamples/CE-02.in
+Test 03  (WA)
+    INPUT:    -3 -9
+    EXPECTED: -12
+    GOT:      Enter two numbers: Sum = -12
+    WHY:      Your output contains extra text ('Enter two numbers: Sum') in addition to the
+              answer. The grader compares output exactly, so prompts such as "Enter two
+              numbers:" make every test fail.
+    FIX:      Print only what the statement asks for - no prompts, labels or messages.
+    reproduce: ./prog < add_prompt_counterexamples/CE-03.in
+Test 04  (WA)
+    INPUT:    100 -250
+    EXPECTED: -150
+    GOT:      Enter two numbers: Sum = -150
+    WHY:      Your output contains extra text ('Enter two numbers: Sum') in addition to the
+              answer. The grader compares output exactly, so prompts such as "Enter two
+              numbers:" make every test fail.
+    FIX:      Print only what the statement asks for - no prompts, labels or messages.
+    reproduce: ./prog < add_prompt_counterexamples/CE-04.in
+Test 05  (WA)
+    INPUT:    123456 654321
+    EXPECTED: 777777
+    GOT:      Enter two numbers: Sum = 777777
+    WHY:      Your output contains extra text ('Enter two numbers: Sum') in addition to the
+              answer. The grader compares output exactly, so prompts such as "Enter two
+              numbers:" make every test fail.
+    FIX:      Print only what the statement asks for - no prompts, labels or messages.
+    reproduce: ./prog < add_prompt_counterexamples/CE-05.in
+
+--- Complexity & profile (gcov operation counts) ---
+  n:            1          10         100
+  ops:          5           5           5
+  ref:          4           4           4
+  estimated O(1) (required O(1)); log-log slope 0.0
+  hot line   3:            1 executions (20%)  int main()
+  hot line   7:            1 executions (20%)  printf("Enter two numbers: ");
+  hot line   8:            1 executions (20%)  scanf("%lld %lld", &first, &second);
+
+--- Feedback by metric ---
+  correctness    0 of 10 tests pass. Fails on test 01 (input 7 5): Your output contains
+                 extra text ('Enter two numbers: Sum') in addition to the answer. The grader
+                 compares output exactly, so prompts such as "Enter two numbers:" make every
+                 test fail.
+  syntax         1 warning(s): line 8: ignoring return value of 'scanf' declared with
+                 attribute 'warn_unused_result'. With -Werror (as the rules request) these
+                 warnings fail the build.
+  structure      Structure issues: single-block code (everything in main); no header comment
+                 on main(); line 8: return value of scanf() is not checked (malformed input
+                 goes unnoticed).
+  modularity     Only main() is defined. Move the core computation into a helper function
+                 (e.g. `long long add(long long lhs, long long rhs)`) and call it from main.
+  logical        Edge cases failing in negatives, zero, int_overflow. Your output contains
+                 extra text ('Enter two numbers: Sum') in addition to the answer. The grader
+                 compares output exactly, so prompts such as "Enter two numbers:" make every
+                 test fail.
+  complexity     Measured growth O(1); required O(1). At n = 100 it executes 1.2x the
+                 reference's line count.
+  memory_safety  No memory errors, leaks or undefined behaviour detected by ASan/UBSan on 10
+                 run(s).
+  readability    Variable names are descriptive; Header comment is present; Consistent
+                 indentation and spacing; Clear control flow with short functions.
+  originality    No suspicious overlap (max similarity 0.56 with tutorial_style_add.c).
+
+--- Suggestions to raise the grade (most points first) ---
+  - Print only what the statement asks for - no prompts, labels or messages. [correctness,
+    up to 20 pts]
+  - Extract the computation into its own function (e.g. `long long add(long long lhs, long
+    long rhs)`); keep main() for I/O. [modularity, up to 6.2 pts]
+  - Add a header comment saying what the program does and comment non-obvious steps.
+    [readability, up to 2.8 pts]
+  - Consider using `int` instead of `long long` if the input is guaranteed to be within the
+    range of a signed 32-bit integer. [readability, up to 2.8 pts]
+  - Put a one-line comment above each function saying what it does (and a file header
+    comment for the program). [structure, up to 2.2 pts]
+  - Check how many items scanf() read, e.g. `if (scanf(...) != 2)`. [structure, up to 2.2
+    pts]
+  - Check scanf's return value (e.g. `if (scanf("%d %d", &a, &b) != 2) return 1;`). [syntax,
+    up to 1 pts]
+
+--- Usefulness & limitations of this evaluation ---
+Useful for:
+  1. Grading programming labs at scale (CS1/CS2 courses)
+     Example: 300 students submit 'sort n integers'. The agent grades all of them overnight
+     under identical limits. A student whose bubble sort times out on n = 100000 receives
+     the failing input size, the measured O(n^2) growth curve and the hottest loop line,
+     instead of a bare 'time limit exceeded'.
+     Benefit: Consistent, explainable grades in minutes; teaching assistants only look at
+     flagged or borderline submissions.
+  2. Coding-interview and hiring screens
+     Example: A company runs 500 candidate submissions for an 'add two integers safely'
+     task. The agent ranks them by correctness, overflow handling and memory safety, and
+     every rejection is backed by a concrete failing input such as '2147483647 1'.
+     Benefit: Fast first-round filtering where every decision can be justified metric by
+     metric.
+  3. Plagiarism and LLM-copy triage
+     Example: Two submissions reach a similarity of 0.93 (threshold 0.85) even though every
+     variable was renamed and every comment rewritten. The agent flags the pair with the
+     matching line ranges, so the instructor inspects 2 files instead of 300. A third
+     submission matches a solution generated by an LLM for the same statement and is flagged
+     as a suspected LLM copy.
+     Benefit: Review time goes only to suspicious cases, and the evidence (lines,
+     similarity) is already prepared.
+  4. Self-check before the deadline / continuous integration for assignments
+     Example: A student's qsort solution passes the visible sample, but the agent's
+     generated boundary case '2 / 0 -2147483648' shows that the comparator 'return a - b'
+     overflows. The minimized counterexample and the suggested fix arrive before the student
+     submits.
+     Benefit: Finds bugs that fixed test suites miss and teaches with the smallest input
+     that breaks the program.
+Limits of this report:
+  1. Testing cannot prove correctness
+     Example: add_magic_value.c prints 0 whenever the first number is 4242. It passes 10/10
+     hidden tests and all 18 generated edge cases and is graded 97.9/100, because neither
+     the tests nor the generators happen to produce 4242.
+     Mitigation: Larger random budgets and instructor-specified 'must-test' values reduce
+     the risk but never remove it; suspicious special-casing still needs a human reader.
+  2. Complexity is estimated from measured operation counts, not proven
+     Example: sort_memmove_insertion.c finds each insertion point by binary search and
+     shifts with memmove(). Its O(n^2) work happens inside libc, which gcov does not
+     instrument, so the executed-line count grows like n log n, the agent reports 'O(n log
+     n) confirmed' and grades it 99.8/100. Likewise a quicksort with a first-element pivot
+     is O(n log n) on the random inputs used for measuring, but O(n^2) on sorted input.
+     Mitigation: Include adversarial (sorted) inputs and a large hidden test that only an
+     efficient solution passes within the time limit.
+  3. Similarity-based copy detection has false positives and false negatives
+     Example: For 'add two integers', two honest solutions are almost the same token stream;
+     the agent avoids flagging them only because of reference-code subtraction and the
+     minimum-shared-fingerprints rule. Conversely, a student who takes an LLM answer and
+     rewrites loops (for -> while), splits functions and reorders statements drops below
+     0.85 and is not flagged. When a pair is flagged, both students are flagged: the agent
+     cannot tell who copied whom.
+     Mitigation: Flags are review signals, never automatic verdicts; the instructor decides
+     after reading the matched lines.
+  4. Verdicts depend on the platform and on external models
+     Example: On Windows (MinGW) `long` is 32 bits, so a solution that sums into `long`
+     overflows and fails tests that pass on Linux; ASan is unavailable there, so
+     memory_safety falls back to UBSan trap mode and a leaking program loses no points. The
+     LLM readability score can also change after `ollama pull` updates the model weights,
+     and a program running at 0.95-1.05 s CPU can flip between AC and TLE across machines.
+     Mitigation: Run official grading in the provided Linux/Docker image, keep the LLM
+     response cache with the course records, and keep the hidden tests far from the time
+     limit; every report records tool versions and hashes.
+
+--- Reproducibility ---
+  submission sha256:144c874413eeb815...  rules sha256:37503316a67cc516...
+  assets sha256:57aca6fad821f7ca5b1a...  grade fingerprint sha256:c20d63cfb2d9f360...
+  tools: gcc 15.2.0, gcov 15.2.0, python 3.14.4, platform linux

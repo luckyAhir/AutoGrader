@@ -1,0 +1,139 @@
+===== Grading report for kadane_int.c =====
+Overall grade: 81.9 / 100
+Problem: max_subarray_sum    Rules: problems/max_subarray_sum/rules.json (sha256:d85d5770d613...)
+First pass: compiled=yes  smoke run=OK  suspected_infinite_loop=no
+
+Metric         Weight        Score  Contribution  Verdict
+correctness        35      30.6/35          30.6  14 of 16 tests pass
+logical            15      12.8/15          12.8  fails: large_values, random
+syntax              5          5/5           5.0  no warnings
+structure          10       7.6/10           7.6  single-block code (everything in main); no header comment o...
+modularity         10       3.8/10           3.8  only main() defined
+memory_safety      15        15/15          15.0  UBSan (trap mode) clean
+readability        10       7.1/10           7.0  terse names: a, n, few comments
+
+--- Where you failed ---
+Test 03 (sample 3 from the problem statement)  (WA)
+    INPUT:    3 \n 1000000000 1000000000 1000000000
+    EXPECTED: 3000000000
+    GOT:      2000000000
+    WHY:      For the result expected 3000000000, got 2000000000.
+    reproduce: ./prog < kadane_int_counterexamples/CE-01.in
+Test 16 (Check for a large positive number)  (WA)
+    INPUT:    10 \n -1000000000 -1000000000 -1000000000 -1000000000 -1000000000 1000000 ... (118 chars in file)
+    EXPECTED: 5000000000
+    GOT:      2000000000
+    WHY:      For the result expected 5000000000, got 2000000000. The input contains
+              negative numbers.
+    reproduce: ./prog < kadane_int_counterexamples/CE-02.in
+CE-03 [edge case: large_values, minimized]  (WA)
+    INPUT:    3 \n 168053846 987131501 992298301
+    EXPECTED: 2147483648
+    GOT:      1155185347
+    WHY:      For the result expected 2147483648, got 1155185347.
+    (shrunk from: 8 \n 997487585 996155143 996997462 995285556 993226503 9... (83 chars))
+    reproduce: ./prog < kadane_int_counterexamples/CE-03.in
+CE-04 [edge case: random, minimized]  (WA)
+    INPUT:    3 \n 576620739 812207277 758655632
+    EXPECTED: 2147483648
+    GOT:      1388828016
+    WHY:      For the result expected 2147483648, got 1388828016.
+    (shrunk from: 30 \n 88514471 -399298400 -962271268 -951285099 47573701... (319 chars))
+    reproduce: ./prog < kadane_int_counterexamples/CE-04.in
+
+--- Feedback by metric ---
+  correctness    14 of 16 tests pass. Fails on test 03 (input 3 \n 1000000000 1000000000
+                 1000000000): For the result expected 3000000000, got 2000000000.
+  logical        Edge cases failing in large_values, random. For the result expected
+                 2147483648, got 1155185347.
+  syntax         Compiles cleanly with -Wall -Wextra -std=c11.
+  structure      Structure issues: single-block code (everything in main); no header comment
+                 on main(); line 8: return value of scanf() is not checked (malformed input
+                 goes unnoticed); line 3: mutable global variable 'a'.
+  modularity     Only main() is defined. Move the core computation into a helper function
+                 and call it from main.
+  memory_safety  No memory errors, leaks or undefined behaviour detected by UBSan (trap
+                 mode) on 1 run(s).
+  readability    Single-letter variable names; Comments on non-obvious steps.
+
+--- Suggestions to raise the grade (most points first) ---
+  - Extract the computation into its own function; keep main() for I/O. [modularity, up to
+    6.2 pts]
+  - Rename a, n to descriptive names. [readability, up to 3.0 pts]
+  - Add a header comment saying what the program does and comment non-obvious steps.
+    [readability, up to 3.0 pts]
+  - Put a one-line comment above each function saying what it does (and a file header
+    comment for the program). [structure, up to 2.4 pts]
+  - Check how many items scanf() read, e.g. `if (scanf(...) != 2)`. [structure, up to 2.4
+    pts]
+  - Pass data through function parameters instead of global variables. [structure, up to 2.4
+    pts]
+
+--- Usefulness & limitations of this evaluation ---
+Useful for:
+  1. Grading programming labs at scale (CS1/CS2 courses)
+     Example: 300 students submit 'sort n integers'. The agent grades all of them overnight
+     under identical limits. A student whose bubble sort times out on n = 100000 receives
+     the failing input size, the measured O(n^2) growth curve and the hottest loop line,
+     instead of a bare 'time limit exceeded'.
+     Benefit: Consistent, explainable grades in minutes; teaching assistants only look at
+     flagged or borderline submissions.
+  2. Coding-interview and hiring screens
+     Example: A company runs 500 candidate submissions for an 'add two integers safely'
+     task. The agent ranks them by correctness, overflow handling and memory safety, and
+     every rejection is backed by a concrete failing input such as '2147483647 1'.
+     Benefit: Fast first-round filtering where every decision can be justified metric by
+     metric.
+  3. Plagiarism and LLM-copy triage
+     Example: Two submissions reach a similarity of 0.93 (threshold 0.85) even though every
+     variable was renamed and every comment rewritten. The agent flags the pair with the
+     matching line ranges, so the instructor inspects 2 files instead of 300. A third
+     submission matches a solution generated by an LLM for the same statement and is flagged
+     as a suspected LLM copy.
+     Benefit: Review time goes only to suspicious cases, and the evidence (lines,
+     similarity) is already prepared.
+  4. Self-check before the deadline / continuous integration for assignments
+     Example: A student's qsort solution passes the visible sample, but the agent's
+     generated boundary case '2 / 0 -2147483648' shows that the comparator 'return a - b'
+     overflows. The minimized counterexample and the suggested fix arrive before the student
+     submits.
+     Benefit: Finds bugs that fixed test suites miss and teaches with the smallest input
+     that breaks the program.
+Limits of this report:
+  1. Testing cannot prove correctness
+     Example: add_magic_value.c prints 0 whenever the first number is 4242. It passes 10/10
+     hidden tests and all 18 generated edge cases and is graded 97.9/100, because neither
+     the tests nor the generators happen to produce 4242.
+     Mitigation: Larger random budgets and instructor-specified 'must-test' values reduce
+     the risk but never remove it; suspicious special-casing still needs a human reader.
+  2. Complexity is estimated from measured operation counts, not proven
+     Example: sort_memmove_insertion.c finds each insertion point by binary search and
+     shifts with memmove(). Its O(n^2) work happens inside libc, which gcov does not
+     instrument, so the executed-line count grows like n log n, the agent reports 'O(n log
+     n) confirmed' and grades it 99.8/100. Likewise a quicksort with a first-element pivot
+     is O(n log n) on the random inputs used for measuring, but O(n^2) on sorted input.
+     Mitigation: Include adversarial (sorted) inputs and a large hidden test that only an
+     efficient solution passes within the time limit.
+  3. Similarity-based copy detection has false positives and false negatives
+     Example: For 'add two integers', two honest solutions are almost the same token stream;
+     the agent avoids flagging them only because of reference-code subtraction and the
+     minimum-shared-fingerprints rule. Conversely, a student who takes an LLM answer and
+     rewrites loops (for -> while), splits functions and reorders statements drops below
+     0.85 and is not flagged. When a pair is flagged, both students are flagged: the agent
+     cannot tell who copied whom.
+     Mitigation: Flags are review signals, never automatic verdicts; the instructor decides
+     after reading the matched lines.
+  4. Verdicts depend on the platform and on external models
+     Example: On Windows (MinGW) `long` is 32 bits, so a solution that sums into `long`
+     overflows and fails tests that pass on Linux; ASan is unavailable there, so
+     memory_safety falls back to UBSan trap mode and a leaking program loses no points. The
+     LLM readability score can also change after `ollama pull` updates the model weights,
+     and a program running at 0.95-1.05 s CPU can flip between AC and TLE across machines.
+     Mitigation: Run official grading in the provided Linux/Docker image, keep the LLM
+     response cache with the course records, and keep the hidden tests far from the time
+     limit; every report records tool versions and hashes.
+
+--- Reproducibility ---
+  submission sha256:32deabc18f33dd72...  rules sha256:d85d5770d613a4d4...
+  assets sha256:f8b1492b38902805f5a7...  grade fingerprint sha256:dce2a57b1ae41dfa...
+  tools: clang 17.0.0, gcov 17.0.0, python 3.10.18, platform darwin

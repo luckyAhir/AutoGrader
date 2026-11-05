@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": false,
+  "system": "You are an expert C programmer. Write a correct, simple C program (C11, only stdio.h and\nstdlib.h) that solves the problem. It reads stdin and prints to stdout in exactly the format of the sample\noutputs: no prompts, no extra text. Reply with ONLY the C code in one ```c block.",
+  "user": "Problem:\nProblem: Matrix Addition (3x3)\n\nGiven two 3x3 matrices, calculate their sum by adding corresponding elements. Print the resulting 3x3 matrix.\n\nInput: The first 3 lines contain 9 integers representing the first matrix. The next 3 lines contain 9 integers representing the second matrix.\n\nOutput: Print the resulting 3x3 matrix, with elements separated by spaces and each row on a new line.\n\nConstraints: -1000 <= A[i][j], B[i][j] <= 1000\n\nSample Input:\n1 2 3\n4 5 6\n7 8 9\n1 1 1\n2 2 2\n3 3 3\n\nSample Output:\n2 3 4\n6 7 8\n10 11 12\n\nSample 1 input:\n```\n1 2 3\n4 5 6\n7 8 9\n1 1 1\n2 2 2\n3 3 3\n```\nSample 1 output:\n```\n2 3 4\n6 7 8\n10 11 12\n```\nSample 2 input:\n```\n1 0 2\n0 1 0\n2 0 1\n3 2 1\n1 3 2\n2 1 3\n```\nSample 2 output:\n```\n4 2 3\n1 4 2\n4 1 4\n```\nSample 3 input:\n```\n0 0 0\n0 0 0\n0 0 0\n1 2 3\n4 5 6\n7 8 9\n```\nSample 3 output:\n```\n1 2 3\n4 5 6\n7 8 9\n```"
+ },
+ "response": "```c\n#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int A[3][3], B[3][3], C[3][3];\n\n    // Read the first matrix\n    for (int i = 0; i < 3; i++) {\n        for (int j = 0; j < 3; j++) {\n            scanf(\"%d\", &A[i][j]);\n        }\n    }\n\n    // Read the second matrix\n    for (int i = 0; i < 3; i++) {\n        for (int j = 0; j < 3; j++) {\n            scanf(\"%d\", &B[i][j]);\n        }\n    }\n\n    // Calculate the sum of the matrices\n    for (int i = 0; i < 3; i++) {\n        for (int j = 0; j < 3; j++) {\n            C[i][j] = A[i][j] + B[i][j];\n        }\n    }\n\n    // Print the resulting matrix\n    for (int i = 0; i < 3; i++) {\n        for (int j = 0; j < 3; j++) {\n            printf(\"%d \", C[i][j]);\n        }\n        printf(\"\\n\");\n    }\n\n    return 0;\n}\n```"
+}

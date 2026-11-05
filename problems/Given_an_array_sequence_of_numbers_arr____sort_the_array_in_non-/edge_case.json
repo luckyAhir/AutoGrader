@@ -1,0 +1,27 @@
+[
+  {
+    "name": "target_at_first_position",
+    "input": "5\n10 10 20 30 40\n",
+    "expected": "10 10 20 30 40\n"
+  },
+  {
+    "name": "target_at_last_position",
+    "input": "5\n40 10 30 20 10\n",
+    "expected": "10 10 20 30 40\n"
+  },
+  {
+    "name": "target_at_middle",
+    "input": "5\n10 30 20 10 40\n",
+    "expected": "10 10 20 30 40\n"
+  },
+  {
+    "name": "target_not_found",
+    "input": "5\n10 30 20 40 50\n",
+    "expected": "10 20 30 40 50\n"
+  },
+  {
+    "name": "single_element",
+    "input": "1\n10\n",
+    "expected": "10\n"
+  }
+]

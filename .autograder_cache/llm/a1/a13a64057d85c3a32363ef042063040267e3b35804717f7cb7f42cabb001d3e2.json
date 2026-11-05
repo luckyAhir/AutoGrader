@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": false,
+  "system": "You are an expert C programmer. Write a correct, simple C program (C11, only stdio.h and\nstdlib.h) that solves the problem. It reads stdin and prints to stdout in exactly the format of the sample\noutputs: no prompts, no extra text. Only the output matters, not the method: use the simplest approach that is\ncertainly correct, even if the problem names an algorithm (for a sorting problem use plain nested loops, not\nrecursion). Declare every function before it is used. Reply with ONLY the C code in one ```c block.",
+  "user": "Problem:\nProblem: Binary Search\n\nGiven a sorted array of n integers and a target value x, find the 0-based index of x using Binary Search. Print the index if found; otherwise, print -1.Also check for out of bound case\n\nInput: The first line contains an integer n. The second line contains n space-separated integers in ascending order. The third line contains the target integer x.\n\nOutput: Print the 0-based index of the target if found; otherwise, print -1.\n\nConstraints: 1 <= n <= 100000, -1000000000 <= A[i], x <= 1000000000\n\nSample Input:\n5\n10 20 30 40 50\n30\n\nSample Output:\n2\n\nSample 1 input:\n```\n5\n10 20 30 40 50\n30\n```\nSample 1 output:\n```\n2\n```\nSample 2 input:\n```\n5\n10 20 30 40 50\n60\n```\nSample 2 output:\n```\n-1\n```"
+ },
+ "response": "```c\n#include <stdio.h>\n#include <stdlib.h>\n\nint binarySearch(int arr[], int n, int x) {\n    int left = 0;\n    int right = n - 1;\n\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n\n        if (arr[mid] == x) {\n            return mid;\n        } else if (arr[mid] < x) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n\n    return -1;\n}\n\nint main() {\n    int n, x;\n\n    // Read the number of elements in the array\n    scanf(\"%d\", &n);\n\n    // Allocate memory for the array\n    int *arr = (int *)malloc(n * sizeof(int));\n\n    // Read the sorted array from stdin\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n\n    // Read the target value x\n    scanf(\"%d\", &x);\n\n    // Perform binary search and print the result\n    int index = binarySearch(arr, n, x);\n    printf(\"%d\\n\", index);\n\n    // Free allocated memory\n    free(arr);\n\n    return 0;\n}\n```"
+}

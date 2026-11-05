@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 1042,
+  "json": true,
+  "system": "You are given a programming problem, worked examples and one input. Work out the exact output a\ncorrect program prints for that input: do the calculation step by step first, then give the output.\nReply with ONLY a JSON object: {\"working\": \"<the calculation, briefly>\", \"output\": \"<exact stdout text>\"}",
+  "user": "Problem statement:\nProblem: Prime Number\n\nGiven an integer n, check whether it is a prime number. Print YES if it is prime; otherwise, print NO.\n\nInput: A single integer n.\n\nOutput: Print YES or NO.\n\nConstraints: \\(1 \\le n \\le 10^9\\)\n\nSample Input:\n7\n\n\nSample Output:\nYES\n\nSample 1 input:\n```\n7\n```\nSample 1 output:\n```\nYES\n```\n\nSample 2 input:\n```\n10\n```\nSample 2 output:\n```\nNO\n```\n\nSample 3 input:\n```\n1\n```\nSample 3 output:\n```\nNO\n```\n\nInput:\n```\n2\n```\nWhat is the exact output?"
+ },
+ "response": "{\n  \"working\": \"To determine if a number is prime, we need to check if it has any divisors other than 1 and itself. For n = 2, we only need to check divisibility by 2.\",\n  \"output\": \"YES\"\n}"
+}

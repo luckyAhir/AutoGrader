@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You describe the INPUT FORMAT of a programming problem as JSON, so a program can build inputs of\nany size. Reply with ONLY: {\"variables\": [...], \"layout\": [[...], ...]}\n- \"variables\": every value the program reads, in reading order. Each has \"name\", \"type\" (int, float, str or\n  char; add [] for a list, [][] for a matrix) and \"min\"/\"max\" from the constraints of the problem.\n- A list needs \"length\" (a number, or the name of an EARLIER variable that holds the count). A matrix needs\n  \"rows\" and \"cols\" the same way.\n- Mark the variable that sets the size of the input with \"role\": \"size\": the count of items, or the number\n  itself when the input is a single number.\n- \"layout\": one list of variable names per input line, in order.\nExample (n, then n integers):\n{\"variables\": [{\"name\": \"n\", \"type\": \"int\", \"min\": 1, \"max\": 100000, \"role\": \"size\"},\n{\"name\": \"a\", \"type\": \"int[]\", \"length\": \"n\", \"min\": -1000, \"max\": 1000}], \"layout\": [[\"n\"], [\"a\"]]}\nExample (a single number):\n{\"variables\": [{\"name\": \"n\", \"type\": \"int\", \"min\": 1, \"max\": 1000000000, \"role\": \"size\"}], \"layout\": [[\"n\"]]}",
+  "user": "Problem:\nGiven an array/sequence of numbers arr[], sort the array in non-descending (ascending) order using the Quick Sort algorithm\n\nSample 1 input:\n```\n5\n20 10 30 40 10\n```\nSample 1 output:\n```\n10 10 20 30 40\n```\nSample 2 input:\n```\n3\n10 30 20\n```\nSample 2 output:\n```\n10 20 30\n```"
+ },
+ "response": "{\"variables\": [{\"name\": \"n\", \"type\": \"int\", \"min\": 1, \"max\": 100000, \"role\": \"size\"},\n{\"name\": \"arr\", \"type\": \"int[]\", \"length\": \"n\", \"min\": -1000000000, \"max\": 1000000000}], \"layout\": [[\"n\"], [\"arr\"]]}"
+}

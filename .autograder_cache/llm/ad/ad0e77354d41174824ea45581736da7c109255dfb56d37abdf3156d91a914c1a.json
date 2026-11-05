@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You design hidden test cases for a programming exercise. Each test is an input and the exact\noutput a correct program prints for it.\nRules:\n- every input must follow the input format and satisfy every constraint in the problem statement exactly;\n- work out each expected output carefully, step by step, from the problem statement; it must be exactly what a\n  correct program prints (same format, same spacing, one line per line of output);\n- every test must check a different situation; do not repeat the samples or the inputs already taken;\n- keep each input under 2000 characters.\nReply with ONLY a JSON object:\n{{\"tests\": [{{\"input\": \"<exact stdin text, \\n for newlines>\", \"output\": \"<exact stdout text>\", \"purpose\": \"<what it checks, at most 12 words>\"}}]}}",
+  "user": "Problem statement:\n# String Palindrome Check\n\nGiven a string, check whether it is a palindrome. A palindrome reads the same forward and backward.\n\nPrint `YES` if the string is a palindrome; otherwise, print `NO`.\n\n### Input Format\nA single string containing lowercase English letters.\n\n### Output Format\nPrint `YES` or `NO`.\n\n### Constraints\n- 1 ≤ length of string ≤ 100000\n- String contains only lowercase English letters.\n\n### Sample Input\n```text\nmadam\n```\n\n### Sample Output\n```text\nYES\n```\n\nSample 1 input:\n```\nmadam\n```\nSample 1 output:\n```\nYES\n```\n\nSample 2 input:\n```\nhello\n```\nSample 2 output:\n```\nNO\n```\n\nWrite 2 test cases that check: odd length palindrome.\nIf no valid input fits this situation, reply with an empty list.\nThese inputs are already taken:\n```\na\n```\n```\naa\n```\n```\nabba\n```\n```\nabc\n```\n```\nxyz\n```"
+ },
+ "response": "{\n  \"tests\": [\n    {\n      \"input\": \"racecar\",\n      \"output\": \"YES\",\n      \"purpose\": \"Odd length palindrome\"\n    },\n    {\n      \"input\": \"noon\",\n      \"output\": \"YES\",\n      \"purpose\": \"Odd length palindrome\"\n    }\n  ]\n}"
+}

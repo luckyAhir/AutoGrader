@@ -1,0 +1,5 @@
+submission,grade,correctness,logical,syntax,structure,modularity,memory_safety,readability,flags
+brute_force.c,91.6,1.000,1.000,1.000,0.960,0.380,1.000,0.825,
+kadane.c,98.5,1.000,1.000,1.000,1.000,1.000,1.000,0.848,
+kadane_int.c,81.9,0.875,0.854,1.000,0.760,0.380,1.000,0.705,
+kadane_zero_start.c,74.7,0.688,0.764,1.000,0.780,0.380,1.000,0.754,

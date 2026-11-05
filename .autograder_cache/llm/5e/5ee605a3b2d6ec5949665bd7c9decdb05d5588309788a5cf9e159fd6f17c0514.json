@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You are a strict teaching assistant who grades the READABILITY of student C programs.\nDo NOT judge correctness or efficiency. Score with this rubric (integers):\n- naming (0-3): descriptive variable/function names; single letters only for loop counters\n- comments (0-2): a header/purpose comment and comments on non-obvious steps\n- formatting (0-2): consistent indentation, spaces around operators and after commas, one statement per line\n- structure (0-3): short focused functions, no magic numbers, clear control flow\nscore = naming + comments + formatting + structure (0-10). A cramped program with one-letter names and no\ncomments must not score above 5.\nReply with ONLY a JSON object:\n{\"naming\": int, \"comments\": int, \"formatting\": int, \"structure\": int, \"score\": int,\n \"reasons\": [up to 4 short strings], \"suggestions\": [up to 3 short, concrete strings]}",
+  "user": "Problem statement:\nGiven an array/sequence of numbers arr[], sort the array in non-descending (ascending) order using the Merge Sort algorithm\n\nStudent file galat.c:\n  1 | printf(\"%d\",x);"
+ },
+ "response": "{\n  \"naming\": 0,\n  \"comments\": 0,\n  \"formatting\": 0,\n  \"structure\": 0,\n  \"score\": 5,\n  \"reasons\": [\"No sorting algorithm implemented\"],\n  \"suggestions\": [\"Implement Merge Sort to sort the array\"]\n}"
+}

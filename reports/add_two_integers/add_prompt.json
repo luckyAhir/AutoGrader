@@ -1,0 +1,803 @@
+{
+  "submission": "add_prompt.c",
+  "submission_path": "submissions/add_two_integers/add_prompt.c",
+  "submission_sha256": "sha256:144c874413eeb815dc17b956a138d4e4d29361abcfa11eaa079c6b692d6cf2ec",
+  "problem": "add_two_integers",
+  "rules_file": "problems/add_two_integers/rules.json",
+  "rules_hash": "sha256:37503316a67cc516c6f77bbdd270753d18fd858b08f8d379105eb3f873b0c9a2",
+  "assets_hash": "sha256:57aca6fad821f7ca5b1ac7fc99d17695f7d32a3068c23df14fd675a6cf7e25a2",
+  "grade": 57.9,
+  "max_grade": 100,
+  "first_pass": {
+    "compiled": true,
+    "compile_command": "cc -O2 -Wall -Wextra -std=c11 add_prompt.c -o prog -lm",
+    "compiler_warnings": 1,
+    "static_sanity": {
+      "has_main": true,
+      "reads_input": true,
+      "writes_output": true,
+      "main_has_return": true
+    },
+    "smoke_ok": true,
+    "suspected_infinite_loop": false,
+    "smoke_verdict": "OK",
+    "sample_output_matches": false,
+    "execution_ok": true
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "weight": 0.2,
+      "effective_weight": 0.2,
+      "score": 0.0,
+      "contribution": 0.0,
+      "status": "ok",
+      "summary": "0 of 10 tests pass",
+      "feedback": "0 of 10 tests pass. Fails on test 01 (input 7 5): Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+      "evidence": {
+        "tests_passed": 0,
+        "tests_total": 10,
+        "verdicts": {
+          "WA": 10
+        },
+        "results": [
+          {
+            "test": "01",
+            "verdict": "WA"
+          },
+          {
+            "test": "02",
+            "verdict": "WA"
+          },
+          {
+            "test": "03",
+            "verdict": "WA"
+          },
+          {
+            "test": "04",
+            "verdict": "WA"
+          },
+          {
+            "test": "05",
+            "verdict": "WA"
+          },
+          {
+            "test": "06",
+            "verdict": "WA"
+          },
+          {
+            "test": "07",
+            "verdict": "WA"
+          },
+          {
+            "test": "08",
+            "verdict": "WA"
+          },
+          {
+            "test": "09",
+            "verdict": "WA"
+          },
+          {
+            "test": "10",
+            "verdict": "WA"
+          }
+        ],
+        "failing": [
+          {
+            "case": "Test 01",
+            "input": "7 5\n",
+            "expected": "12\n",
+            "got": "Enter two numbers: Sum = 12\n",
+            "verdict": "WA",
+            "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail."
+          },
+          {
+            "case": "Test 02",
+            "input": "0 0\n",
+            "expected": "0\n",
+            "got": "Enter two numbers: Sum = 0\n",
+            "verdict": "WA",
+            "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail."
+          },
+          {
+            "case": "Test 03",
+            "input": "-3 -9\n",
+            "expected": "-12\n",
+            "got": "Enter two numbers: Sum = -12\n",
+            "verdict": "WA",
+            "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail."
+          },
+          {
+            "case": "Test 04",
+            "input": "100 -250\n",
+            "expected": "-150\n",
+            "got": "Enter two numbers: Sum = -150\n",
+            "verdict": "WA",
+            "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail."
+          },
+          {
+            "case": "Test 05",
+            "input": "123456 654321\n",
+            "expected": "777777\n",
+            "got": "Enter two numbers: Sum = 777777\n",
+            "verdict": "WA",
+            "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail."
+          }
+        ]
+      },
+      "suggestions": [
+        "Print only what the statement asks for - no prompts, labels or messages."
+      ]
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 0.9,
+      "contribution": 9.0,
+      "status": "ok",
+      "summary": "-Wunused-result x1",
+      "feedback": "1 warning(s): line 8: ignoring return value of 'scanf' declared with attribute 'warn_unused_result'. With -Werror (as the rules request) these warnings fail the build.",
+      "evidence": {
+        "command": "cc -O2 -Wall -Wextra -std=c11 add_prompt.c",
+        "werror_requested": true,
+        "warnings": [
+          {
+            "line": 8,
+            "kind": "warning",
+            "message": "ignoring return value of 'scanf' declared with attribute 'warn_unused_result'",
+            "flag": "-Wunused-result"
+          }
+        ],
+        "errors": []
+      },
+      "suggestions": [
+        "Check scanf's return value (e.g. `if (scanf(\"%d %d\", &a, &b) != 2) return 1;`)."
+      ]
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 0.78,
+      "contribution": 7.8,
+      "status": "ok",
+      "summary": "single-block code (everything in main); no header comment on main()",
+      "feedback": "Structure issues: single-block code (everything in main); no header comment on main(); line 8: return value of scanf() is not checked (malformed input goes unnoticed).",
+      "evidence": {
+        "functions": [
+          {
+            "name": "main",
+            "line": 3,
+            "nloc": 8,
+            "cyclomatic": 1,
+            "nesting": 0,
+            "params": 0,
+            "header_comment": false
+          }
+        ],
+        "limits": {
+          "max_cyclomatic": 8,
+          "max_function_length": 40,
+          "max_nesting": 4
+        },
+        "subscores": {
+          "cyclomatic": 1.0,
+          "length": 1.0,
+          "nesting": 1.0,
+          "documentation": 0.0,
+          "hygiene": 0.9
+        },
+        "issues": [
+          {
+            "line": 8,
+            "severity": "style",
+            "id": "unchecked-input",
+            "message": "return value of scanf() is not checked (malformed input goes unnoticed)",
+            "penalty": 0.1,
+            "fix": "Check how many items scanf() read, e.g. `if (scanf(...) != 2)`."
+          }
+        ],
+        "cppcheck": "not available"
+      },
+      "suggestions": [
+        "Put a one-line comment above each function saying what it does (and a file header comment for the program).",
+        "Check how many items scanf() read, e.g. `if (scanf(...) != 2)`."
+      ]
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 0.38,
+      "contribution": 3.8,
+      "status": "ok",
+      "summary": "only main() defined",
+      "feedback": "Only main() is defined. Move the core computation into a helper function (e.g. `long long add(long long lhs, long long rhs)`) and call it from main.",
+      "evidence": {
+        "functions_defined": 1,
+        "expected_min": 2,
+        "functions": [
+          {
+            "name": "main",
+            "statements": 5,
+            "uses": []
+          }
+        ],
+        "called_from_main": [],
+        "unused_functions": [],
+        "main_statement_share": 1.0,
+        "subscores": {
+          "count": 0.5,
+          "helpers_used": 0.0,
+          "main_share": 0.6
+        }
+      },
+      "suggestions": [
+        "Extract the computation into its own function (e.g. `long long add(long long lhs, long long rhs)`); keep main() for I/O."
+      ]
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 0.0,
+      "contribution": 0.0,
+      "status": "ok",
+      "summary": "fails: negatives, zero, int_overflow",
+      "feedback": "Edge cases failing in negatives, zero, int_overflow. Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+      "evidence": {
+        "categories": {
+          "negatives": {
+            "cases": 5,
+            "passed": 0,
+            "failing": [
+              {
+                "case": "negatives",
+                "input": "0 0\n",
+                "expected": "0\n",
+                "got": "Enter two numbers: Sum = 0\n",
+                "verdict": "WA",
+                "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+                "minimized": true
+              }
+            ]
+          },
+          "zero": {
+            "cases": 3,
+            "passed": 0,
+            "failing": [
+              {
+                "case": "zero",
+                "input": "0 0\n",
+                "expected": "0\n",
+                "got": "Enter two numbers: Sum = 0\n",
+                "verdict": "WA",
+                "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail."
+              }
+            ]
+          },
+          "int_overflow": {
+            "cases": 10,
+            "passed": 0,
+            "failing": [
+              {
+                "case": "int_overflow",
+                "input": "0 0\n",
+                "expected": "0\n",
+                "got": "Enter two numbers: Sum = 0\n",
+                "verdict": "WA",
+                "note": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+                "minimized": true
+              }
+            ]
+          }
+        },
+        "oracle": "reference solution"
+      },
+      "suggestions": [
+        "Print only what the statement asks for - no prompts, labels or messages."
+      ]
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "status": "ok",
+      "summary": "O(1) confirmed",
+      "feedback": "Measured growth O(1); required O(1). At n = 100 it executes 1.2x the reference's line count.",
+      "evidence": {
+        "method": "gcov line counts",
+        "required": "O(1)",
+        "sizes": [
+          1,
+          10,
+          100
+        ],
+        "measurements": [
+          {
+            "n": 1,
+            "ops": 5
+          },
+          {
+            "n": 10,
+            "ops": 5
+          },
+          {
+            "n": 100,
+            "ops": 5
+          }
+        ],
+        "fit": {
+          "estimate": "O(1)",
+          "errors": {
+            "O(1)": 0.0
+          },
+          "loglog_slope": 0.0
+        },
+        "estimated": "O(1)",
+        "reference_ops": [
+          {
+            "n": 1,
+            "ops": 4
+          },
+          {
+            "n": 10,
+            "ops": 4
+          },
+          {
+            "n": 100,
+            "ops": 4
+          }
+        ],
+        "ops_ratio_vs_reference_at_max_n": 1.25,
+        "hot_lines": [
+          {
+            "line": 3,
+            "count": 1,
+            "share": 0.2,
+            "code": "int main()"
+          },
+          {
+            "line": 7,
+            "count": 1,
+            "share": 0.2,
+            "code": "printf(\"Enter two numbers: \");"
+          },
+          {
+            "line": 8,
+            "count": 1,
+            "share": 0.2,
+            "code": "scanf(\"%lld %lld\", &first, &second);"
+          }
+        ]
+      },
+      "suggestions": []
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "status": "ok",
+      "summary": "ASan/UBSan clean",
+      "feedback": "No memory errors, leaks or undefined behaviour detected by ASan/UBSan on 10 run(s).",
+      "evidence": {
+        "backend": "asan",
+        "flags": "-fsanitize=address,undefined",
+        "runs": 10,
+        "findings": []
+      },
+      "suggestions": []
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 0.725,
+      "contribution": 7.25,
+      "status": "ok",
+      "summary": "no comments",
+      "feedback": "Variable names are descriptive; Header comment is present; Consistent indentation and spacing; Clear control flow with short functions.",
+      "evidence": {
+        "mode": "hybrid",
+        "heuristic": {
+          "score": 0.75,
+          "subscores": {
+            "naming": 1.0,
+            "comments": 0.0,
+            "formatting": 1.0,
+            "clarity": 1.0
+          },
+          "weights": {
+            "naming": 0.3,
+            "comments": 0.25,
+            "formatting": 0.25,
+            "clarity": 0.2
+          },
+          "details": {
+            "naming": {
+              "declared_names": 2,
+              "descriptive": 2,
+              "terse": []
+            },
+            "comments": {
+              "comment_lines": 0,
+              "code_lines": 8,
+              "ratio": 0.0,
+              "target_ratio": 0.15,
+              "header_comment": false
+            },
+            "formatting": {
+              "operators_spaced": "1/1",
+              "commas_followed_by_space": "4/4",
+              "long_lines": 0,
+              "indented_block_lines": 1.0,
+              "mixed_tabs_spaces": false,
+              "lines_with_several_statements": 0
+            },
+            "clarity": {
+              "magic_numbers": [],
+              "count": 0
+            }
+          }
+        },
+        "llm": {
+          "provider": "ollama",
+          "model": "qwen2.5-coder:7b",
+          "temperature": 0.0,
+          "seed": 42,
+          "cached": true,
+          "cache_key": "ddfaf05fd51d23b2",
+          "raw_response": "{\n  \"naming\": 2,\n  \"comments\": 1,\n  \"formatting\": 2,\n  \"structure\": 2,\n  \"score\": 7,\n  \"reasons\": [\n    \"Variable names are descriptive.\",\n    \"Header comment is present.\",\n    \"Consistent indentation and spacing.\",\n    \"Clear control flow with short functions.\"\n  ],\n  \"suggestions\": [\n    \"Consider using `int` instead of `long long` if the input is guaranteed to be within the range of a signed 32-bit integer.\",\n    \"Add a comment explaining the purpose of the `scanf` function.\",\n    \"Add a comment explaining the purpose of the `printf` function.\"\n  ]\n}"
+        },
+        "formula": "hybrid: 0.5 x llm (7.0/10) + 0.5 x heuristic (7.5/10)"
+      },
+      "suggestions": [
+        "Add a header comment saying what the program does and comment non-obvious steps.",
+        "Consider using `int` instead of `long long` if the input is guaranteed to be within the range of a signed 32-bit integer."
+      ]
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "status": "ok",
+      "summary": "max similarity 0.56, not flagged",
+      "feedback": "No suspicious overlap (max similarity 0.56 with tutorial_style_add.c).",
+      "evidence": {
+        "max_similarity": 0.5556,
+        "flag_threshold": 0.85,
+        "min_shared": 8,
+        "distinctive_fingerprints": 9,
+        "boilerplate_removed": 6,
+        "corpus_files": 4,
+        "known_sources": 3,
+        "corpus_hash": "sha256:ceec616eb2bebaa4f11b564f062251e76008d270a9fdbc84a54cba54b43d8214",
+        "top_matches": [
+          {
+            "kind": "known_source",
+            "file": "tutorial_style_add.c",
+            "similarity": 0.5556,
+            "shared_fingerprints": 5,
+            "token_sequence_ratio": 0.8315,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                5,
+                9
+              ]
+            ],
+            "their_lines": [
+              [
+                6,
+                9
+              ],
+              [
+                12,
+                14
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "add.c",
+            "similarity": 0.5,
+            "shared_fingerprints": 3,
+            "token_sequence_ratio": 0.8919,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                7,
+                9
+              ]
+            ],
+            "their_lines": [
+              [
+                3,
+                5
+              ]
+            ]
+          },
+          {
+            "kind": "known_source",
+            "file": "llm_qwen2_5_coder_7b_seed1.c",
+            "similarity": 0.5,
+            "shared_fingerprints": 3,
+            "token_sequence_ratio": 0.8919,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                7,
+                9
+              ]
+            ],
+            "their_lines": [
+              [
+                6,
+                8
+              ]
+            ]
+          },
+          {
+            "kind": "known_source",
+            "file": "llm_qwen2_5_coder_7b_seed2.c",
+            "similarity": 0.1111,
+            "shared_fingerprints": 1,
+            "token_sequence_ratio": 0.7273,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                8,
+                9
+              ]
+            ],
+            "their_lines": [
+              [
+                8,
+                9
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "add_copied.c",
+            "similarity": 0.0,
+            "shared_fingerprints": 0,
+            "token_sequence_ratio": 0.4225,
+            "identical_tokens": false,
+            "your_lines": [],
+            "their_lines": []
+          }
+        ],
+        "llm_style": {
+          "score": 0.0,
+          "comments": 0,
+          "matching_comments": 0,
+          "examples": []
+        }
+      },
+      "suggestions": []
+    }
+  ],
+  "counterexamples": [
+    {
+      "id": "CE-01",
+      "metric": "correctness",
+      "source": "hidden test 01",
+      "label": "Test 01",
+      "verdict": "WA",
+      "input": "7 5\n",
+      "expected": "12\n",
+      "got": "Enter two numbers: Sum = 12\n",
+      "sizes": {
+        "input": 4,
+        "expected": 3,
+        "got": 28
+      },
+      "why": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+      "hint": "Print only what the statement asks for - no prompts, labels or messages.",
+      "minimized": false,
+      "files": {
+        "input": "add_prompt_counterexamples/CE-01.in",
+        "expected": "add_prompt_counterexamples/CE-01.expected"
+      }
+    },
+    {
+      "id": "CE-02",
+      "metric": "correctness",
+      "source": "hidden test 02",
+      "label": "Test 02",
+      "verdict": "WA",
+      "input": "0 0\n",
+      "expected": "0\n",
+      "got": "Enter two numbers: Sum = 0\n",
+      "sizes": {
+        "input": 4,
+        "expected": 2,
+        "got": 27
+      },
+      "why": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+      "hint": "Print only what the statement asks for - no prompts, labels or messages.",
+      "minimized": false,
+      "files": {
+        "input": "add_prompt_counterexamples/CE-02.in",
+        "expected": "add_prompt_counterexamples/CE-02.expected"
+      }
+    },
+    {
+      "id": "CE-03",
+      "metric": "correctness",
+      "source": "hidden test 03",
+      "label": "Test 03",
+      "verdict": "WA",
+      "input": "-3 -9\n",
+      "expected": "-12\n",
+      "got": "Enter two numbers: Sum = -12\n",
+      "sizes": {
+        "input": 6,
+        "expected": 4,
+        "got": 29
+      },
+      "why": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+      "hint": "Print only what the statement asks for - no prompts, labels or messages.",
+      "minimized": false,
+      "files": {
+        "input": "add_prompt_counterexamples/CE-03.in",
+        "expected": "add_prompt_counterexamples/CE-03.expected"
+      }
+    },
+    {
+      "id": "CE-04",
+      "metric": "correctness",
+      "source": "hidden test 04",
+      "label": "Test 04",
+      "verdict": "WA",
+      "input": "100 -250\n",
+      "expected": "-150\n",
+      "got": "Enter two numbers: Sum = -150\n",
+      "sizes": {
+        "input": 9,
+        "expected": 5,
+        "got": 30
+      },
+      "why": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+      "hint": "Print only what the statement asks for - no prompts, labels or messages.",
+      "minimized": false,
+      "files": {
+        "input": "add_prompt_counterexamples/CE-04.in",
+        "expected": "add_prompt_counterexamples/CE-04.expected"
+      }
+    },
+    {
+      "id": "CE-05",
+      "metric": "correctness",
+      "source": "hidden test 05",
+      "label": "Test 05",
+      "verdict": "WA",
+      "input": "123456 654321\n",
+      "expected": "777777\n",
+      "got": "Enter two numbers: Sum = 777777\n",
+      "sizes": {
+        "input": 14,
+        "expected": 7,
+        "got": 32
+      },
+      "why": "Your output contains extra text ('Enter two numbers: Sum') in addition to the answer. The grader compares output exactly, so prompts such as \"Enter two numbers:\" make every test fail.",
+      "hint": "Print only what the statement asks for - no prompts, labels or messages.",
+      "minimized": false,
+      "files": {
+        "input": "add_prompt_counterexamples/CE-05.in",
+        "expected": "add_prompt_counterexamples/CE-05.expected"
+      }
+    }
+  ],
+  "flags": [],
+  "suggestions": [
+    {
+      "metric": "correctness",
+      "points_at_stake": 20.0,
+      "suggestion": "Print only what the statement asks for - no prompts, labels or messages."
+    },
+    {
+      "metric": "modularity",
+      "points_at_stake": 6.2,
+      "suggestion": "Extract the computation into its own function (e.g. `long long add(long long lhs, long long rhs)`); keep main() for I/O."
+    },
+    {
+      "metric": "readability",
+      "points_at_stake": 2.75,
+      "suggestion": "Add a header comment saying what the program does and comment non-obvious steps."
+    },
+    {
+      "metric": "readability",
+      "points_at_stake": 2.75,
+      "suggestion": "Consider using `int` instead of `long long` if the input is guaranteed to be within the range of a signed 32-bit integer."
+    },
+    {
+      "metric": "structure",
+      "points_at_stake": 2.2,
+      "suggestion": "Put a one-line comment above each function saying what it does (and a file header comment for the program)."
+    },
+    {
+      "metric": "structure",
+      "points_at_stake": 2.2,
+      "suggestion": "Check how many items scanf() read, e.g. `if (scanf(...) != 2)`."
+    },
+    {
+      "metric": "syntax",
+      "points_at_stake": 1.0,
+      "suggestion": "Check scanf's return value (e.g. `if (scanf(\"%d %d\", &a, &b) != 2) return 1;`)."
+    }
+  ],
+  "usefulness_limitations": {
+    "usefulness": [
+      {
+        "use_case": "Grading programming labs at scale (CS1/CS2 courses)",
+        "example": "300 students submit 'sort n integers'. The agent grades all of them overnight under identical limits. A student whose bubble sort times out on n = 100000 receives the failing input size, the measured O(n^2) growth curve and the hottest loop line, instead of a bare 'time limit exceeded'.",
+        "benefit": "Consistent, explainable grades in minutes; teaching assistants only look at flagged or borderline submissions."
+      },
+      {
+        "use_case": "Coding-interview and hiring screens",
+        "example": "A company runs 500 candidate submissions for an 'add two integers safely' task. The agent ranks them by correctness, overflow handling and memory safety, and every rejection is backed by a concrete failing input such as '2147483647 1'.",
+        "benefit": "Fast first-round filtering where every decision can be justified metric by metric."
+      },
+      {
+        "use_case": "Plagiarism and LLM-copy triage",
+        "example": "Two submissions reach a similarity of 0.93 (threshold 0.85) even though every variable was renamed and every comment rewritten. The agent flags the pair with the matching line ranges, so the instructor inspects 2 files instead of 300. A third submission matches a solution generated by an LLM for the same statement and is flagged as a suspected LLM copy.",
+        "benefit": "Review time goes only to suspicious cases, and the evidence (lines, similarity) is already prepared."
+      },
+      {
+        "use_case": "Self-check before the deadline / continuous integration for assignments",
+        "example": "A student's qsort solution passes the visible sample, but the agent's generated boundary case '2 / 0 -2147483648' shows that the comparator 'return a - b' overflows. The minimized counterexample and the suggested fix arrive before the student submits.",
+        "benefit": "Finds bugs that fixed test suites miss and teaches with the smallest input that breaks the program."
+      }
+    ],
+    "limitations": [
+      {
+        "limitation": "Testing cannot prove correctness",
+        "example": "add_magic_value.c prints 0 whenever the first number is 4242. It passes 10/10 hidden tests and all 18 generated edge cases and is graded 97.9/100, because neither the tests nor the generators happen to produce 4242.",
+        "mitigation": "Larger random budgets and instructor-specified 'must-test' values reduce the risk but never remove it; suspicious special-casing still needs a human reader."
+      },
+      {
+        "limitation": "Complexity is estimated from measured operation counts, not proven",
+        "example": "sort_memmove_insertion.c finds each insertion point by binary search and shifts with memmove(). Its O(n^2) work happens inside libc, which gcov does not instrument, so the executed-line count grows like n log n, the agent reports 'O(n log n) confirmed' and grades it 99.8/100. Likewise a quicksort with a first-element pivot is O(n log n) on the random inputs used for measuring, but O(n^2) on sorted input.",
+        "mitigation": "Include adversarial (sorted) inputs and a large hidden test that only an efficient solution passes within the time limit."
+      },
+      {
+        "limitation": "Similarity-based copy detection has false positives and false negatives",
+        "example": "For 'add two integers', two honest solutions are almost the same token stream; the agent avoids flagging them only because of reference-code subtraction and the minimum-shared-fingerprints rule. Conversely, a student who takes an LLM answer and rewrites loops (for -> while), splits functions and reorders statements drops below 0.85 and is not flagged. When a pair is flagged, both students are flagged: the agent cannot tell who copied whom.",
+        "mitigation": "Flags are review signals, never automatic verdicts; the instructor decides after reading the matched lines."
+      },
+      {
+        "limitation": "Verdicts depend on the platform and on external models",
+        "example": "On Windows (MinGW) `long` is 32 bits, so a solution that sums into `long` overflows and fails tests that pass on Linux; ASan is unavailable there, so memory_safety falls back to UBSan trap mode and a leaking program loses no points. The LLM readability score can also change after `ollama pull` updates the model weights, and a program running at 0.95-1.05 s CPU can flip between AC and TLE across machines.",
+        "mitigation": "Run official grading in the provided Linux/Docker image, keep the LLM response cache with the course records, and keep the hidden tests far from the time limit; every report records tool versions and hashes."
+      }
+    ]
+  },
+  "tool_versions": {
+    "gcc": "15.2.0",
+    "gcov": "15.2.0",
+    "cppcheck": null,
+    "valgrind": null,
+    "python": "3.14.4",
+    "platform": "linux"
+  },
+  "agent_version": "1.0.0",
+  "grade_fingerprint": "sha256:c20d63cfb2d9f360cf2e545698eed93886396d8dd1b829c5d343e6530b666539"
+}

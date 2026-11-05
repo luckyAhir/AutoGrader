@@ -1,0 +1,126 @@
+{
+  "problem": " Given an array/sequence of numbers arr[], sort the array in non-descending (ascending) order using the Quick Sort algorithm",
+  "time_limit_s": 1,
+  "memory_limit_mb": 64,
+  "compile_flags": "-O2 -Wall -Wextra -std=c11",
+  "sample": [
+    {
+      "input": "5\n20 10 30 40 10\n",
+      "output": "10 10 20 30 40\n"
+    },
+    {
+      "input": "3\n10 30 20\n",
+      "output": "10 20 30\n"
+    }
+  ],
+  "compare": {
+    "mode": "lines"
+  },
+  "feedback": {
+    "max_counterexamples": 8
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "llm_tests",
+      "weight": 0.2,
+      "params": {
+        "provider": "ollama",
+        "model": "qwen2.5-coder:3b",
+        "temperature": 0,
+        "seed": 42,
+        "num_tests": 8,
+        "max_attempts": 3
+      }
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "weight": 0.1,
+      "params": {
+        "flags": "-Wall -Wextra -std=c11"
+      }
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.1,
+      "params": {
+        "max_cyclomatic": 8,
+        "max_function_length": 40
+      }
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.1,
+      "params": {
+        "expect_helpers": true,
+        "min_functions": 2,
+        "helper_hint": "Implement binary search using a separate function that returns the index of the target or -1."
+      }
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.1,
+      "params": {
+        "cases": [
+          "target_at_first_position",
+          "target_at_last_position",
+          "target_at_middle",
+          "target_not_found",
+          "single_element",
+          "negative_numbers",
+          "duplicate_elements",
+          "large_sorted_array"
+        ]
+      }
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.1,
+      "params": {
+        "required": "O(nlog n)",
+        "sizes": [
+          1,
+          10,
+          100,
+          1000,
+          10000,
+          100000
+        ]
+      }
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.1,
+      "params": {
+        "flags": "-fsanitize=address,undefined"
+      }
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.1,
+      "params": {
+        "provider": "ollama",
+        "model": "qwen2.5-coder:3b",
+        "temperature": 0,
+        "seed": 42,
+        "mode": "hybrid",
+        "llm_weight": 0.5
+      }
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.1,
+      "params": {
+        "flag_threshold": 0.85
+      }
+    }
+  ]
+}

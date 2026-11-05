@@ -1,0 +1,199 @@
+===== Grading report for sort_llm_copy.c =====
+Overall grade: 77.7 / 100
+Problem: sort_integers    Rules: problems/sort_integers/rules.json (sha256:ad09f2c66f31...)
+First pass: compiled=yes  smoke run=OK  suspected_infinite_loop=no
+
+Metric         Weight        Score  Contribution  Verdict
+correctness        25        20/25          20.0  8 of 10 tests pass
+syntax              5          4/5           4.0  -Wunused-result x2
+structure          10       7.8/10           7.8  no header comment on cmp_func(), main(); line 10: return va...
+modularity          5        3.8/5           3.8  2 functions; main holds 93% of statements
+logical            15      13.2/15          13.2  fails: int_overflow, random
+complexity         15        15/15          15.0  O(n log n) confirmed
+memory_safety      10       5.5/10           5.5  memory leak (direct) at sort_llm_copy.c:11 in main(); signe...
+readability         5        3.4/5           3.4  terse names: x, y, no comments
+originality         5          0/5           0.0  FLAGGED: 1.00 vs llm_qwen2_5_coder_7b_seed2.c
+forbidden           5          5/5           5.0  none used
+
+--- Flags ---
+  - [medium] memory_leak: memory leak: 1 byte(s) in 1 allocation(s) never freed
+    (sort_llm_copy.c:11 in main())
+  - [high] suspected_online_or_llm_copy: 1.00 similar to known source
+    llm_qwen2_5_coder_7b_seed2.c
+  - [high] suspected_online_or_llm_copy: 0.97 similar to known source
+    llm_qwen2_5_coder_7b_seed1.c
+
+--- Where you failed ---
+Test 08  (WA)
+    INPUT:    6 \n 2147483647 -2147483648 0 -1 1 2147483647
+    EXPECTED: -2147483648 -1 0 1 2147483647 2147483647
+    GOT:      2147483647 -2147483648 -1 0 1 2147483647
+    WHY:      Your output contains the right numbers but in the wrong order. The input
+              contains values near INT_MIN/INT_MAX; a comparator written as `return a - b`
+              overflows for such values and reports the wrong order.
+    FIX:      Write the comparator without subtraction: `return (x > y) - (x < y);`.
+    reproduce: ./prog < sort_llm_copy_counterexamples/CE-01.in
+Test 10  (WA)
+    INPUT:    100000 \n 254079307 -1683387129 -345591591 2098095247 1762916570 -6817569 ... (1,098,971 chars in file)
+    EXPECTED: -2147478595 -2147405316 -2147375106 -2147070993 -2147070092 -214704408 ... (1,098,964 chars in file)
+    GOT:      803996000 997234402 1081414342 1085459935 1099292061 1189817936 124595 ... (1,098,964 chars in file)
+    WHY:      Your output contains the right numbers but in the wrong order. The input
+              contains values near INT_MIN/INT_MAX; a comparator written as `return a - b`
+              overflows for such values and reports the wrong order.
+    FIX:      Write the comparator without subtraction: `return (x > y) - (x < y);`.
+    reproduce: ./prog < sort_llm_copy_counterexamples/CE-02.in
+CE-03 [edge case: int_overflow, minimized]  (WA)
+    INPUT:    2 \n 0 -2147483648
+    EXPECTED: -2147483648 0
+    GOT:      0 -2147483648
+    WHY:      Your output contains the right numbers but in the wrong order. The input
+              contains values near INT_MIN/INT_MAX; a comparator written as `return a - b`
+              overflows for such values and reports the wrong order.
+    FIX:      Write the comparator without subtraction: `return (x > y) - (x < y);`.
+    (shrunk from: 6 \n 2147483647 -2147483648 2147483647 -2147483648 21474... (71 chars))
+    reproduce: ./prog < sort_llm_copy_counterexamples/CE-03.in
+CE-04 [edge case: random, minimized]  (WA)
+    INPUT:    2 \n -726756101 1420727548
+    EXPECTED: -726756101 1420727548
+    GOT:      1420727548 -726756101
+    WHY:      Your output contains the right numbers but in the wrong order. The input
+              contains values near INT_MIN/INT_MAX; a comparator written as `return a - b`
+              overflows for such values and reports the wrong order.
+    FIX:      Write the comparator without subtraction: `return (x > y) - (x < y);`.
+    (shrunk from: 27 \n 1022633815 1519995064 -1056438221 1068685667 -1958... (318 chars))
+    reproduce: ./prog < sort_llm_copy_counterexamples/CE-04.in
+
+--- Memory & undefined-behaviour diagnostics ---
+  - memory leak (direct) at sort_llm_copy.c:11 in main(): 1 byte(s) in 1 allocation(s) never
+    freed (first seen on hidden test 03: 0)
+  - signed integer overflow at sort_llm_copy.c:5: signed integer overflow: 2147483647 -
+    -2147483648 cannot be represented in type 'int' (first seen on hidden test 08: 6 \n
+    2147483647 -2147483648 0 -1 1 2147483647)
+
+--- Complexity & profile (gcov operation counts) ---
+  n:          500        1000        2000        4000        8000
+  ops:      10367       22691       49643      106677      229545
+  ref:      17438       38810       85670      187206      406694
+  estimated O(n log n) (required O(n log n)); log-log slope 1.106
+  hot line   4:       90,768 executions (40%)  int cmp_func(const void *x, const void *y) {
+  hot line   5:       90,768 executions (40%)  return (*(int*)x - *(int*)y);
+  hot line  18:        8,001 executions (3%)  for (int k = 0; k < size; k++) {
+
+--- Feedback by metric ---
+  correctness    8 of 10 tests pass. Fails on test 08 (input 6 \n 2147483647 -2147483648 0
+                 -1 1 21474... (43 chars)): Your output contains the right numbers but in
+                 the wrong order. The input contains values near INT_MIN/INT_MAX; a
+                 comparator written as `return a - b` overflows for such values and reports
+                 the wrong order.
+  syntax         2 warning(s): line 10: ignoring return value of 'scanf' declared with
+                 attribute 'warn_unused_result'; line 19: ignoring return value of 'scanf'
+                 declared with attribute 'warn_unused_result'.
+  structure      Structure issues: no header comment on cmp_func(), main(); line 10: return
+                 value of scanf() is not checked (malformed input goes unnoticed).
+  modularity     1 helper function(s): cmp_func(). main() still contains 93% of all
+                 statements.
+  logical        Edge cases failing in int_overflow, random. Your output contains the right
+                 numbers but in the wrong order. The input contains values near
+                 INT_MIN/INT_MAX; a comparator written as `return a - b` overflows for such
+                 values and reports the wrong order.
+  complexity     Measured growth O(n log n); required O(n log n). At n = 8000 it executes
+                 0.6x the reference's line count.
+  memory_safety  ASan/UBSan reports 2 problem(s): memory leak (direct) at sort_llm_copy.c:11
+                 in main() (1 byte(s) in 1 allocation(s) never freed), triggered by hidden
+                 test 03; signed integer overflow at sort_llm_copy.c:5 (signed integer
+                 overflow: 2147483647 - -2147483648 cannot be represented in type 'int'),
+                 triggered by hidden test 08.
+  readability    Variable names are not descriptive; Lacks a header or purpose comment;
+                 Formatting is consistent with spaces around operators and after commas;
+                 Functions are short and focused.
+  originality    Your code is 1.00 similar to known online/LLM source
+                 llm_qwen2_5_coder_7b_seed2.c (threshold 0.85); lines 4-15, 18-30 match.
+                 This is flagged for instructor review.
+  forbidden      No forbidden constructs.
+
+--- Suggestions to raise the grade (most points first) ---
+  - Write the comparator without subtraction: `return (x > y) - (x < y);`. [correctness, up
+    to 5 pts]
+  - Submit your own work; cite any source you adapted. [originality, up to 5 pts]
+  - Free every malloc'ed block before returning (sort_llm_copy.c:11 in main()).
+    [memory_safety, up to 4.5 pts]
+  - Avoid signed integer overflow (sort_llm_copy.c:5): use a wider type or check the range
+    first. [memory_safety, up to 4.5 pts]
+  - Put a one-line comment above each function saying what it does (and a file header
+    comment for the program). [structure, up to 2.2 pts]
+  - Check how many items scanf() read, e.g. `if (scanf(...) != 2)`. [structure, up to 2.2
+    pts]
+  - Rename x, y to descriptive names. [readability, up to 1.6 pts]
+  - Add a header comment saying what the program does and comment non-obvious steps.
+    [readability, up to 1.6 pts]
+  - Ensure consistent formatting throughout the code. [readability, up to 1.6 pts]
+  - Move more of main()'s logic into the helper functions. [modularity, up to 1.2 pts]
+
+--- Usefulness & limitations of this evaluation ---
+Useful for:
+  1. Grading programming labs at scale (CS1/CS2 courses)
+     Example: 300 students submit 'sort n integers'. The agent grades all of them overnight
+     under identical limits. A student whose bubble sort times out on n = 100000 receives
+     the failing input size, the measured O(n^2) growth curve and the hottest loop line,
+     instead of a bare 'time limit exceeded'.
+     Benefit: Consistent, explainable grades in minutes; teaching assistants only look at
+     flagged or borderline submissions.
+  2. Coding-interview and hiring screens
+     Example: A company runs 500 candidate submissions for an 'add two integers safely'
+     task. The agent ranks them by correctness, overflow handling and memory safety, and
+     every rejection is backed by a concrete failing input such as '2147483647 1'.
+     Benefit: Fast first-round filtering where every decision can be justified metric by
+     metric.
+  3. Plagiarism and LLM-copy triage
+     Example: Two submissions reach a similarity of 0.93 (threshold 0.85) even though every
+     variable was renamed and every comment rewritten. The agent flags the pair with the
+     matching line ranges, so the instructor inspects 2 files instead of 300. A third
+     submission matches a solution generated by an LLM for the same statement and is flagged
+     as a suspected LLM copy.
+     Benefit: Review time goes only to suspicious cases, and the evidence (lines,
+     similarity) is already prepared.
+  4. Self-check before the deadline / continuous integration for assignments
+     Example: A student's qsort solution passes the visible sample, but the agent's
+     generated boundary case '2 / 0 -2147483648' shows that the comparator 'return a - b'
+     overflows. The minimized counterexample and the suggested fix arrive before the student
+     submits.
+     Benefit: Finds bugs that fixed test suites miss and teaches with the smallest input
+     that breaks the program.
+Limits of this report:
+  1. Testing cannot prove correctness
+     Example: add_magic_value.c prints 0 whenever the first number is 4242. It passes 10/10
+     hidden tests and all 18 generated edge cases and is graded 97.9/100, because neither
+     the tests nor the generators happen to produce 4242.
+     Mitigation: Larger random budgets and instructor-specified 'must-test' values reduce
+     the risk but never remove it; suspicious special-casing still needs a human reader.
+  2. Complexity is estimated from measured operation counts, not proven
+     Example: sort_memmove_insertion.c finds each insertion point by binary search and
+     shifts with memmove(). Its O(n^2) work happens inside libc, which gcov does not
+     instrument, so the executed-line count grows like n log n, the agent reports 'O(n log
+     n) confirmed' and grades it 99.8/100. Likewise a quicksort with a first-element pivot
+     is O(n log n) on the random inputs used for measuring, but O(n^2) on sorted input.
+     Mitigation: Include adversarial (sorted) inputs and a large hidden test that only an
+     efficient solution passes within the time limit.
+  3. Similarity-based copy detection has false positives and false negatives
+     Example: For 'add two integers', two honest solutions are almost the same token stream;
+     the agent avoids flagging them only because of reference-code subtraction and the
+     minimum-shared-fingerprints rule. Conversely, a student who takes an LLM answer and
+     rewrites loops (for -> while), splits functions and reorders statements drops below
+     0.85 and is not flagged. When a pair is flagged, both students are flagged: the agent
+     cannot tell who copied whom.
+     Mitigation: Flags are review signals, never automatic verdicts; the instructor decides
+     after reading the matched lines.
+  4. Verdicts depend on the platform and on external models
+     Example: On Windows (MinGW) `long` is 32 bits, so a solution that sums into `long`
+     overflows and fails tests that pass on Linux; ASan is unavailable there, so
+     memory_safety falls back to UBSan trap mode and a leaking program loses no points. The
+     LLM readability score can also change after `ollama pull` updates the model weights,
+     and a program running at 0.95-1.05 s CPU can flip between AC and TLE across machines.
+     Mitigation: Run official grading in the provided Linux/Docker image, keep the LLM
+     response cache with the course records, and keep the hidden tests far from the time
+     limit; every report records tool versions and hashes.
+
+--- Reproducibility ---
+  submission sha256:135447394158d2e6...  rules sha256:ad09f2c66f3177e2...
+  assets sha256:56354130a28fbf76a340...  grade fingerprint sha256:95e6c9298f3ab59d...
+  tools: gcc 15.2.0, gcov 15.2.0, python 3.14.4, platform linux

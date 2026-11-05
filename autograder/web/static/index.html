@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoGrader</title>
+  <meta name="description" content="Grade C programs against your course's rules, with counterexamples for every failure.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 17l7 7L27 7' fill='none' stroke='%232563eb' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#/grade" aria-label="AutoGrader home">
+      <svg class="brand-tick" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 17.5c2.6 2 5 4.4 7.2 7C15.8 17 20.6 11 27 5.5"/></svg>
+      <span>AutoGrader</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#/grade" data-nav="grade">Grade</a>
+      <a href="#/results" data-nav="results">Class results</a>
+    </nav>
+    <div class="toolstatus" id="toolstatus" aria-live="polite"></div>
+  </header>
+  <main id="main" tabindex="-1"></main>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

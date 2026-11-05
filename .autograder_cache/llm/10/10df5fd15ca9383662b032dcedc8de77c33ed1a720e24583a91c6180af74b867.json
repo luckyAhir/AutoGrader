@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 1042,
+  "json": true,
+  "system": "You are given a programming problem, worked examples and one input. Work out the exact output a\ncorrect program prints for that input: do the calculation step by step first, then give the output.\nReply with ONLY a JSON object: {\"working\": \"<the calculation, briefly>\", \"output\": \"<exact stdout text>\"}",
+  "user": "Problem statement:\n2. Short problem statement\nProblem: Matrix Addition (3×3)\n\nGiven two 3×3 integer matrices A and B, calculate their sum by adding corresponding elements and print the resulting 3×3 matrix.\n\nInput:\n- First 3 lines contain the elements of matrix A.\n- Next 3 lines contain the elements of matrix B.\n- Each line contains exactly 3 integers.\nOutput:\n\nPrint the resulting 3×3 matrix, with elements separated by spaces.\n\nConstraints:\n\\[\n-1000 \\le A[i][j], B[i][j] \\le 1000\n\\]\n\nSample Input:\n1 2 3\n4 5 6\n7 8 9\n9 8 7\n6 5 4\n3 2 1\n\n\nSample Output:\n10 10 10\n10 10 10\n10 10 10\n\nSample 1 input:\n```\n1 2 3\n4 5 6\n7 8 9\n9 8 7\n6 5 4\n3 2 1\n```\nSample 1 output:\n```\n10 10 10\n10 10 10\n10 10 10\n```\n\nSample 2 input:\n```\n1 0 -1\n2 3 4\n5 6 7\n1 2 3\n4 5 6\n7 8 9\n```\nSample 2 output:\n```\n2 2 2\n6 8 10\n12 14 16\n```\n\nInput:\n```\n1 -2 3\n-4 5 -6\n7 8 9\n-9 -8 -7\n6 -5 4\n3 -2 1\n```\nWhat is the exact output?"
+ },
+ "response": "{\n  \"working\": \"Matrix A: [1, -2, 3], [4, 5, -6], [7, 8, 9]\\nMatrix B: [-9, -8, -7], [6, -5, 4], [3, -2, 1]\\nResulting Matrix: [0, -10, -4], [10, 0, -2], [10, 6, 8]\",\n  \"output\": \"0 -10 -4\\n10 0 -2\\n10 6 8\"\n}"
+}

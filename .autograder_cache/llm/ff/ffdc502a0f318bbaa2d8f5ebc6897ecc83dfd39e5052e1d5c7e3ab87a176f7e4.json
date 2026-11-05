@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:7b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You are a strict teaching assistant who grades the READABILITY of student C programs.\nDo NOT judge correctness or efficiency. Score with this rubric (integers):\n- naming (0-3): descriptive variable/function names; single letters only for loop counters\n- comments (0-2): a header/purpose comment and comments on non-obvious steps\n- formatting (0-2): consistent indentation, spaces around operators and after commas, one statement per line\n- structure (0-3): short focused functions, no magic numbers, clear control flow\nscore = naming + comments + formatting + structure (0-10). A cramped program with one-letter names and no\ncomments must not score above 5.\nReply with ONLY a JSON object:\n{\"naming\": int, \"comments\": int, \"formatting\": int, \"structure\": int, \"score\": int,\n \"reasons\": [up to 4 short strings], \"suggestions\": [up to 3 short, concrete strings]}",
+  "user": "Problem statement:\nRead two integers on a single line separated by whitespace and print their sum followed by a newline.\n\nEach integer fits in a signed 32-bit int (-2147483648 .. 2147483647). The sum may not.\n\nSample input:\n7 5\n\nSample output:\n12\n\nStudent file add_copied.c:\n  1 | // sum of two numbers\n  2 | #include <stdio.h>\n  3 | #include <stdlib.h>\n  4 | \n  5 | // adds them\n  6 | static long long sum_two(long long p, long long q)\n  7 | {\n  8 |     return p + q;\n  9 | }\n 10 | \n 11 | // gets the input\n 12 | static int get_numbers(long long *x1, long long *x2)\n 13 | {\n 14 |     return scanf(\"%lld %lld\", x1, x2) == 2;\n 15 | }\n 16 | \n 17 | int main(void)\n 18 | {\n 19 |     long long num_a;\n 20 |     long long num_b;\n 21 | \n 22 |     if (!get_numbers(&num_a, &num_b)) {\n 23 |         fprintf(stderr, \"error: expected two integers on one line\\n\");\n 24 |         return EXIT_FAILURE;\n 25 |     }\n 26 |     printf(\"%lld\\n\", sum_two(num_a, num_b));\n 27 |     return EXIT_SUCCESS;\n 28 | }\n 29 | "
+ },
+ "response": "{\n  \"naming\": 2,\n  \"comments\": 2,\n  \"formatting\": 2,\n  \"structure\": 3,\n  \"score\": 9,\n  \"reasons\": [\n    \"Variable names are descriptive.\",\n    \"Comments explain the purpose of functions and error handling.\",\n    \"Consistent indentation and spacing around operators.\",\n    \"Functions are short and focused.\"\n  ],\n  \"suggestions\": [\n    \"Consider using more descriptive function names.\"\n  ]\n}"
+}

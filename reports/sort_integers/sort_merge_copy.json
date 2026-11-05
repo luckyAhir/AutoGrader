@@ -1,0 +1,817 @@
+{
+  "submission": "sort_merge_copy.c",
+  "submission_path": "submissions/sort_integers/sort_merge_copy.c",
+  "submission_sha256": "sha256:14c2b81e02b81dc516829c9a70ab5462d792d794d88a08de423f9ed15ae15262",
+  "problem": "sort_integers",
+  "rules_file": "problems/sort_integers/rules.json",
+  "rules_hash": "sha256:ad09f2c66f3177e21b3647f795d93f245d01726645f8f5567adc4d499144f37f",
+  "assets_hash": "sha256:56354130a28fbf76a340f5fcfae200e484e92a22a1a8cce172bd03586b131852",
+  "grade": 91.5,
+  "max_grade": 100,
+  "first_pass": {
+    "compiled": true,
+    "compile_command": "cc -O2 -Wall -Wextra -std=c11 sort_merge_copy.c -o prog -lm",
+    "compiler_warnings": 0,
+    "static_sanity": {
+      "has_main": true,
+      "reads_input": true,
+      "writes_output": true,
+      "main_has_return": true
+    },
+    "smoke_ok": true,
+    "suspected_infinite_loop": false,
+    "smoke_verdict": "OK",
+    "sample_output_matches": true,
+    "execution_ok": true
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "weight": 0.25,
+      "effective_weight": 0.25,
+      "score": 1.0,
+      "contribution": 25.0,
+      "status": "ok",
+      "summary": "10 of 10 tests pass",
+      "feedback": "10 of 10 tests pass.",
+      "evidence": {
+        "tests_passed": 10,
+        "tests_total": 10,
+        "verdicts": {
+          "AC": 10
+        },
+        "results": [
+          {
+            "test": "01",
+            "verdict": "AC"
+          },
+          {
+            "test": "02",
+            "verdict": "AC"
+          },
+          {
+            "test": "03",
+            "verdict": "AC"
+          },
+          {
+            "test": "04",
+            "verdict": "AC"
+          },
+          {
+            "test": "05",
+            "verdict": "AC"
+          },
+          {
+            "test": "06",
+            "verdict": "AC"
+          },
+          {
+            "test": "07",
+            "verdict": "AC"
+          },
+          {
+            "test": "08",
+            "verdict": "AC"
+          },
+          {
+            "test": "09",
+            "verdict": "AC"
+          },
+          {
+            "test": "10",
+            "verdict": "AC"
+          }
+        ],
+        "failing": []
+      },
+      "suggestions": []
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "status": "ok",
+      "summary": "no warnings",
+      "feedback": "Compiles cleanly with -Wall -Wextra -std=c11.",
+      "evidence": {
+        "command": "cc -O2 -Wall -Wextra -std=c11 sort_merge_copy.c",
+        "werror_requested": false,
+        "warnings": [],
+        "errors": []
+      },
+      "suggestions": []
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 0.8,
+      "contribution": 8.0,
+      "status": "ok",
+      "summary": "no header comment on out(), input_array(), combine(), msort()",
+      "feedback": "Structure issues: no header comment on out(), input_array(), combine(), msort().",
+      "evidence": {
+        "functions": [
+          {
+            "name": "out",
+            "line": 4,
+            "nloc": 7,
+            "cyclomatic": 3,
+            "nesting": 1,
+            "params": 2,
+            "header_comment": false
+          },
+          {
+            "name": "input_array",
+            "line": 12,
+            "nloc": 14,
+            "cyclomatic": 5,
+            "nesting": 2,
+            "params": 1,
+            "header_comment": false
+          },
+          {
+            "name": "combine",
+            "line": 28,
+            "nloc": 20,
+            "cyclomatic": 7,
+            "nesting": 2,
+            "params": 5,
+            "header_comment": false
+          },
+          {
+            "name": "msort",
+            "line": 50,
+            "nloc": 10,
+            "cyclomatic": 2,
+            "nesting": 1,
+            "params": 4,
+            "header_comment": false
+          },
+          {
+            "name": "main",
+            "line": 61,
+            "nloc": 22,
+            "cyclomatic": 6,
+            "nesting": 1,
+            "params": 0,
+            "header_comment": false
+          }
+        ],
+        "limits": {
+          "max_cyclomatic": 10,
+          "max_function_length": 40,
+          "max_nesting": 3
+        },
+        "subscores": {
+          "cyclomatic": 1.0,
+          "length": 1.0,
+          "nesting": 1.0,
+          "documentation": 0.0,
+          "hygiene": 1.0
+        },
+        "issues": [],
+        "cppcheck": "not available"
+      },
+      "suggestions": [
+        "Put a one-line comment above each function saying what it does (and a file header comment for the program)."
+      ]
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "status": "ok",
+      "summary": "5 functions; main holds 42% of statements",
+      "feedback": "4 helper function(s): out(), input_array(), combine(), msort().",
+      "evidence": {
+        "functions_defined": 5,
+        "expected_min": 3,
+        "functions": [
+          {
+            "name": "out",
+            "statements": 3,
+            "uses": []
+          },
+          {
+            "name": "input_array",
+            "statements": 6,
+            "uses": []
+          },
+          {
+            "name": "combine",
+            "statements": 7,
+            "uses": []
+          },
+          {
+            "name": "msort",
+            "statements": 5,
+            "uses": [
+              "combine",
+              "msort"
+            ]
+          },
+          {
+            "name": "main",
+            "statements": 15,
+            "uses": [
+              "input_array",
+              "msort",
+              "out"
+            ]
+          }
+        ],
+        "called_from_main": [
+          "combine",
+          "input_array",
+          "msort",
+          "out"
+        ],
+        "unused_functions": [],
+        "main_statement_share": 0.4167,
+        "subscores": {
+          "count": 1.0,
+          "helpers_used": 1.0,
+          "main_share": 1.0
+        }
+      },
+      "suggestions": []
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.15,
+      "effective_weight": 0.15,
+      "score": 1.0,
+      "contribution": 15.0,
+      "status": "ok",
+      "summary": "all 32 edge cases pass",
+      "feedback": "Handles every generated edge case (empty, single, negatives, duplicates, sorted, reverse_sorted, int_overflow, whitespace, random).",
+      "evidence": {
+        "categories": {
+          "empty": {
+            "cases": 1,
+            "passed": 1
+          },
+          "single": {
+            "cases": 2,
+            "passed": 2
+          },
+          "negatives": {
+            "cases": 3,
+            "passed": 3
+          },
+          "duplicates": {
+            "cases": 3,
+            "passed": 3
+          },
+          "sorted": {
+            "cases": 2,
+            "passed": 2
+          },
+          "reverse_sorted": {
+            "cases": 2,
+            "passed": 2
+          },
+          "int_overflow": {
+            "cases": 5,
+            "passed": 5
+          },
+          "whitespace": {
+            "cases": 6,
+            "passed": 6
+          },
+          "random": {
+            "cases": 8,
+            "passed": 8
+          }
+        },
+        "oracle": "reference solution"
+      },
+      "suggestions": []
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.15,
+      "effective_weight": 0.15,
+      "score": 1.0,
+      "contribution": 15.0,
+      "status": "ok",
+      "summary": "O(n log n) confirmed",
+      "feedback": "Measured growth O(n log n); required O(n log n). At n = 8000 it executes 1.6x the reference's line count.",
+      "evidence": {
+        "method": "gcov line counts",
+        "required": "O(n log n)",
+        "sizes": [
+          500,
+          1000,
+          2000,
+          4000,
+          8000
+        ],
+        "measurements": [
+          {
+            "n": 500,
+            "ops": 31816
+          },
+          {
+            "n": 1000,
+            "ops": 68611
+          },
+          {
+            "n": 2000,
+            "ops": 147230
+          },
+          {
+            "n": 4000,
+            "ops": 314422
+          },
+          {
+            "n": 8000,
+            "ops": 668910
+          }
+        ],
+        "fit": {
+          "estimate": "O(n log n)",
+          "errors": {
+            "O(log n)": 1.313586,
+            "O(n)": 0.105123,
+            "O(n log n)": 0.030223,
+            "O(n^2)": 0.813905,
+            "O(n^3)": 1.244507
+          },
+          "loglog_slope": 1.089
+        },
+        "estimated": "O(n log n)",
+        "reference_ops": [
+          {
+            "n": 500,
+            "ops": 17438
+          },
+          {
+            "n": 1000,
+            "ops": 38810
+          },
+          {
+            "n": 2000,
+            "ops": 85670
+          },
+          {
+            "n": 4000,
+            "ops": 187206
+          },
+          {
+            "n": 8000,
+            "ops": 406694
+          }
+        ],
+        "ops_ratio_vs_reference_at_max_n": 1.64,
+        "hot_lines": [
+          {
+            "line": 45,
+            "count": 111807,
+            "share": 0.1671,
+            "code": "for (c = lo; c < hi; c++) {"
+          },
+          {
+            "line": 46,
+            "count": 103808,
+            "share": 0.1552,
+            "code": "arr[c] = tmp[c];"
+          },
+          {
+            "line": 32,
+            "count": 101670,
+            "share": 0.152,
+            "code": "while (a < md && b < hi) {"
+          }
+        ]
+      },
+      "suggestions": []
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "status": "ok",
+      "summary": "ASan/UBSan clean",
+      "feedback": "No memory errors, leaks or undefined behaviour detected by ASan/UBSan on 15 run(s).",
+      "evidence": {
+        "backend": "asan",
+        "flags": "-fsanitize=address,undefined",
+        "runs": 15,
+        "findings": []
+      },
+      "suggestions": []
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 0.7084,
+      "contribution": 3.54,
+      "status": "ok",
+      "summary": "terse names: a, b, c, hi, no comments",
+      "feedback": "Variable names are not descriptive; Lacks a header comment explaining the purpose of the program; Formatting is consistent with spaces around operators and after commas; Functions are short and focused, with clear control flow.",
+      "evidence": {
+        "mode": "hybrid",
+        "heuristic": {
+          "score": 0.6167,
+          "subscores": {
+            "naming": 0.5556,
+            "comments": 0.0,
+            "formatting": 1.0,
+            "clarity": 1.0
+          },
+          "weights": {
+            "naming": 0.3,
+            "comments": 0.25,
+            "formatting": 0.25,
+            "clarity": 0.2
+          },
+          "details": {
+            "naming": {
+              "declared_names": 27,
+              "descriptive": 15,
+              "terse": [
+                "a",
+                "b",
+                "c",
+                "hi",
+                "lo",
+                "md",
+                "n",
+                "p"
+              ]
+            },
+            "comments": {
+              "comment_lines": 0,
+              "code_lines": 73,
+              "ratio": 0.0,
+              "target_ratio": 0.15,
+              "header_comment": false
+            },
+            "formatting": {
+              "operators_spaced": "43/43",
+              "commas_followed_by_space": "29/29",
+              "long_lines": 0,
+              "indented_block_lines": 1.0,
+              "mixed_tabs_spaces": false,
+              "lines_with_several_statements": 0
+            },
+            "clarity": {
+              "magic_numbers": [],
+              "count": 0
+            }
+          }
+        },
+        "llm": {
+          "provider": "ollama",
+          "model": "qwen2.5-coder:7b",
+          "temperature": 0.0,
+          "seed": 42,
+          "cached": true,
+          "cache_key": "45365492d893dc2f",
+          "raw_response": "{\n  \"naming\": 2,\n  \"comments\": 1,\n  \"formatting\": 2,\n  \"structure\": 3,\n  \"score\": 8,\n  \"reasons\": [\n    \"Variable names are not descriptive.\",\n    \"Lacks a header comment explaining the purpose of the program.\",\n    \"Formatting is consistent with spaces around operators and after commas.\",\n    \"Functions are short and focused, with clear control flow.\"\n  ],\n  \"suggestions\": [\n    \"Use more descriptive variable names.\",\n    \"Add a header comment explaining the program's purpose.\",\n    \"Consider using a more efficient memory allocation method.\"\n  ]\n}"
+        },
+        "formula": "hybrid: 0.5 x llm (8.0/10) + 0.5 x heuristic (6.2/10)"
+      },
+      "suggestions": [
+        "Rename a, b, c to descriptive names.",
+        "Add a header comment saying what the program does and comment non-obvious steps.",
+        "Consider using a more efficient memory allocation method."
+      ]
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 0.0,
+      "contribution": 0.0,
+      "status": "ok",
+      "summary": "FLAGGED: 0.97 vs sort_merge.c",
+      "feedback": "Your code is 0.97 similar to classmate file sort_merge.c (threshold 0.85); lines 4-6, 9-58, 65-83 match. This is flagged for instructor review.",
+      "evidence": {
+        "max_similarity": 0.9691,
+        "flag_threshold": 0.85,
+        "min_shared": 8,
+        "distinctive_fingerprints": 97,
+        "boilerplate_removed": 43,
+        "corpus_files": 5,
+        "known_sources": 2,
+        "corpus_hash": "sha256:c7a73c58c7e1e2809262e9ccedf1c146f65d95b865fd4b95c6eccfb086a4a1eb",
+        "top_matches": [
+          {
+            "kind": "peer",
+            "file": "sort_merge.c",
+            "similarity": 0.9691,
+            "shared_fingerprints": 94,
+            "token_sequence_ratio": 0.7314,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                4,
+                6
+              ],
+              [
+                9,
+                58
+              ],
+              [
+                65,
+                83
+              ]
+            ],
+            "their_lines": [
+              [
+                10,
+                30
+              ],
+              [
+                33,
+                42
+              ],
+              [
+                45,
+                59
+              ],
+              [
+                62,
+                64
+              ],
+              [
+                74,
+                92
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "sort_bubble.c",
+            "similarity": 0.175,
+            "shared_fingerprints": 7,
+            "token_sequence_ratio": 0.1375,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                14,
+                14
+              ],
+              [
+                28,
+                28
+              ],
+              [
+                32,
+                33
+              ],
+              [
+                50,
+                52
+              ],
+              [
+                56,
+                58
+              ],
+              [
+                71,
+                71
+              ]
+            ],
+            "their_lines": [
+              [
+                6,
+                6
+              ],
+              [
+                14,
+                14
+              ],
+              [
+                18,
+                19
+              ],
+              [
+                37,
+                37
+              ],
+              [
+                47,
+                47
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "sort_selection_leak.c",
+            "similarity": 0.0652,
+            "shared_fingerprints": 3,
+            "token_sequence_ratio": 0.2187,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                46,
+                46
+              ],
+              [
+                56,
+                58
+              ]
+            ],
+            "their_lines": [
+              [
+                6,
+                6
+              ],
+              [
+                16,
+                16
+              ]
+            ]
+          },
+          {
+            "kind": "known_source",
+            "file": "llm_qwen2_5_coder_7b_seed2.c",
+            "similarity": 0.0541,
+            "shared_fingerprints": 2,
+            "token_sequence_ratio": 0.1512,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                70,
+                71
+              ]
+            ],
+            "their_lines": [
+              [
+                13,
+                14
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "sort_llm_copy.c",
+            "similarity": 0.0541,
+            "shared_fingerprints": 2,
+            "token_sequence_ratio": 0.1512,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                70,
+                71
+              ]
+            ],
+            "their_lines": [
+              [
+                10,
+                11
+              ]
+            ]
+          }
+        ],
+        "llm_style": {
+          "score": 0.0,
+          "comments": 0,
+          "matching_comments": 0,
+          "examples": []
+        }
+      },
+      "suggestions": [
+        "Submit your own work; cite any source you adapted."
+      ]
+    },
+    {
+      "name": "forbidden",
+      "analyzer": "forbidden_constructs",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "status": "ok",
+      "summary": "none used",
+      "feedback": "No forbidden constructs.",
+      "evidence": {
+        "violations": [],
+        "forbidden_calls": [
+          "gets",
+          "system"
+        ],
+        "forbidden_headers": [],
+        "forbidden_keywords": [
+          "goto"
+        ],
+        "required_calls": []
+      },
+      "suggestions": []
+    }
+  ],
+  "counterexamples": [],
+  "flags": [
+    {
+      "type": "suspected_plagiarism",
+      "severity": "high",
+      "peer": "sort_merge.c",
+      "similarity": 0.9691,
+      "message": "0.97 similar to sort_merge.c (your lines 4-6, 9-58, 65-83); instructor review needed",
+      "metric": "originality"
+    }
+  ],
+  "suggestions": [
+    {
+      "metric": "originality",
+      "points_at_stake": 5.0,
+      "suggestion": "Submit your own work; cite any source you adapted."
+    },
+    {
+      "metric": "structure",
+      "points_at_stake": 2.0,
+      "suggestion": "Put a one-line comment above each function saying what it does (and a file header comment for the program)."
+    },
+    {
+      "metric": "readability",
+      "points_at_stake": 1.46,
+      "suggestion": "Rename a, b, c to descriptive names."
+    },
+    {
+      "metric": "readability",
+      "points_at_stake": 1.46,
+      "suggestion": "Add a header comment saying what the program does and comment non-obvious steps."
+    },
+    {
+      "metric": "readability",
+      "points_at_stake": 1.46,
+      "suggestion": "Consider using a more efficient memory allocation method."
+    }
+  ],
+  "usefulness_limitations": {
+    "usefulness": [
+      {
+        "use_case": "Grading programming labs at scale (CS1/CS2 courses)",
+        "example": "300 students submit 'sort n integers'. The agent grades all of them overnight under identical limits. A student whose bubble sort times out on n = 100000 receives the failing input size, the measured O(n^2) growth curve and the hottest loop line, instead of a bare 'time limit exceeded'.",
+        "benefit": "Consistent, explainable grades in minutes; teaching assistants only look at flagged or borderline submissions."
+      },
+      {
+        "use_case": "Coding-interview and hiring screens",
+        "example": "A company runs 500 candidate submissions for an 'add two integers safely' task. The agent ranks them by correctness, overflow handling and memory safety, and every rejection is backed by a concrete failing input such as '2147483647 1'.",
+        "benefit": "Fast first-round filtering where every decision can be justified metric by metric."
+      },
+      {
+        "use_case": "Plagiarism and LLM-copy triage",
+        "example": "Two submissions reach a similarity of 0.93 (threshold 0.85) even though every variable was renamed and every comment rewritten. The agent flags the pair with the matching line ranges, so the instructor inspects 2 files instead of 300. A third submission matches a solution generated by an LLM for the same statement and is flagged as a suspected LLM copy.",
+        "benefit": "Review time goes only to suspicious cases, and the evidence (lines, similarity) is already prepared."
+      },
+      {
+        "use_case": "Self-check before the deadline / continuous integration for assignments",
+        "example": "A student's qsort solution passes the visible sample, but the agent's generated boundary case '2 / 0 -2147483648' shows that the comparator 'return a - b' overflows. The minimized counterexample and the suggested fix arrive before the student submits.",
+        "benefit": "Finds bugs that fixed test suites miss and teaches with the smallest input that breaks the program."
+      }
+    ],
+    "limitations": [
+      {
+        "limitation": "Testing cannot prove correctness",
+        "example": "add_magic_value.c prints 0 whenever the first number is 4242. It passes 10/10 hidden tests and all 18 generated edge cases and is graded 97.9/100, because neither the tests nor the generators happen to produce 4242.",
+        "mitigation": "Larger random budgets and instructor-specified 'must-test' values reduce the risk but never remove it; suspicious special-casing still needs a human reader."
+      },
+      {
+        "limitation": "Complexity is estimated from measured operation counts, not proven",
+        "example": "sort_memmove_insertion.c finds each insertion point by binary search and shifts with memmove(). Its O(n^2) work happens inside libc, which gcov does not instrument, so the executed-line count grows like n log n, the agent reports 'O(n log n) confirmed' and grades it 99.8/100. Likewise a quicksort with a first-element pivot is O(n log n) on the random inputs used for measuring, but O(n^2) on sorted input.",
+        "mitigation": "Include adversarial (sorted) inputs and a large hidden test that only an efficient solution passes within the time limit."
+      },
+      {
+        "limitation": "Similarity-based copy detection has false positives and false negatives",
+        "example": "For 'add two integers', two honest solutions are almost the same token stream; the agent avoids flagging them only because of reference-code subtraction and the minimum-shared-fingerprints rule. Conversely, a student who takes an LLM answer and rewrites loops (for -> while), splits functions and reorders statements drops below 0.85 and is not flagged. When a pair is flagged, both students are flagged: the agent cannot tell who copied whom.",
+        "mitigation": "Flags are review signals, never automatic verdicts; the instructor decides after reading the matched lines."
+      },
+      {
+        "limitation": "Verdicts depend on the platform and on external models",
+        "example": "On Windows (MinGW) `long` is 32 bits, so a solution that sums into `long` overflows and fails tests that pass on Linux; ASan is unavailable there, so memory_safety falls back to UBSan trap mode and a leaking program loses no points. The LLM readability score can also change after `ollama pull` updates the model weights, and a program running at 0.95-1.05 s CPU can flip between AC and TLE across machines.",
+        "mitigation": "Run official grading in the provided Linux/Docker image, keep the LLM response cache with the course records, and keep the hidden tests far from the time limit; every report records tool versions and hashes."
+      }
+    ]
+  },
+  "tool_versions": {
+    "gcc": "15.2.0",
+    "gcov": "15.2.0",
+    "cppcheck": null,
+    "valgrind": null,
+    "python": "3.14.4",
+    "platform": "linux"
+  },
+  "agent_version": "1.0.0",
+  "grade_fingerprint": "sha256:fcbae1b82b54aef82d6c1066537bfbcea4f315bd5d2d8d736838518e2b863c77"
+}

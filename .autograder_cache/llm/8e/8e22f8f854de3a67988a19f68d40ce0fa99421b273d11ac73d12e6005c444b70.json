@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You design hidden test cases for a programming exercise. Each test is an input and the exact\noutput a correct program prints for it.\nRules:\n- every input must follow the input format and satisfy every constraint in the problem statement exactly;\n- work out each expected output carefully, step by step, from the problem statement, and write the working\n  down before the output; the output must be exactly what a correct program prints (same format, same spacing,\n  one line per line of output);\n- every test must check a different situation; do not repeat the samples or the inputs already taken;\n- keep each input under 2000 characters.\nReply with ONLY a JSON object:\n{{\"tests\": [{{\"input\": \"<exact stdin text, \\n for newlines>\", \"working\": \"<the calculation, briefly>\", \"output\": \"<exact stdout text>\", \"purpose\": \"<what it checks, at most 12 words>\"}}]}}",
+  "user": "Problem statement:\nProblem: Prime Number\n\nGiven an integer n, check whether it is a prime number. Print YES if it is prime; otherwise, print NO.\n\nInput: A single integer n.\n\nOutput: Print YES or NO.\n\nConstraints: \\(1 \\le n \\le 10^9\\)\n\nSample Input:\n7\n\n\nSample Output:\nYES\n\nSample 1 input:\n```\n7\n```\nSample 1 output:\n```\nYES\n```\n\nSample 2 input:\n```\n10\n```\nSample 2 output:\n```\nNO\n```\n\nSample 3 input:\n```\n1\n```\nSample 3 output:\n```\nNO\n```\n\nWrite 2 test cases that check: number 2.\nIf no valid input fits this situation, reply with an empty list."
+ },
+ "response": "{\n  \"tests\": [\n    {\n      \"input\": \"2\",\n      \"working\": \"Check if 2 is prime by testing divisibility from 3 to sqrt(2)\",\n      \"output\": \"YES\",\n      \"purpose\": \"Check if the smallest prime number\"\n    }\n  ]\n}"
+}

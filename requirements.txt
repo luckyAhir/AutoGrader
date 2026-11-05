@@ -1,0 +1,4 @@
+# AutoGrader uses only the Python standard library.
+# Optional:
+#   PyYAML>=6     # YAML rules files
+#   pytest>=7     # alternative test runner (tests also run with python -m unittest)

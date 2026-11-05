@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You are a strict teaching assistant who grades the READABILITY of student C programs.\nDo NOT judge correctness or efficiency. Score with this rubric (integers):\n- naming (0-3): descriptive variable/function names; single letters only for loop counters\n- comments (0-2): a header/purpose comment and comments on non-obvious steps\n- formatting (0-2): consistent indentation, spaces around operators and after commas, one statement per line\n- structure (0-3): short focused functions, no magic numbers, clear control flow\nscore = naming + comments + formatting + structure (0-10). A cramped program with one-letter names and no\ncomments must not score above 5.\nReply with ONLY a JSON object:\n{\"naming\": int, \"comments\": int, \"formatting\": int, \"structure\": int, \"score\": int,\n \"reasons\": [up to 4 short strings], \"suggestions\": [up to 3 short, concrete strings]}",
+  "user": "Problem statement:\nProblem: String Palindrome\n\nGiven a string, check whether it is a palindrome. A palindrome is a string that reads the same forward and backward. Print YES if the string is a palindrome; otherwise, print NO.\n\nInput: A single string containing no spaces.\n\nOutput: Print YES or NO.\n\nConstraints: 1 <= length of string <= 100000. The string contains only lowercase English letters.\n\nSample Input:\nmadam\n\nSample Output:\nYES\n\nStudent file palindrome2.c:\n  1 | #include <stdio.h>\n  2 | #include <string.h>\n  3 | \n  4 | int main() {\n  5 |     char str[1000];\n  6 |     int i, len, flag = 1;\n  7 | \n  8 |     scanf(\"%s\", str);\n  9 | \n 10 |     len = strlen(str);\n 11 | \n 12 |     for (i = 0; i < len / 2; i++) {\n 13 |         if (str[i] != str[len - i - 1]) {\n 14 |             flag = 0;\n 15 |             break;\n 16 |         }\n 17 |     }\n 18 | \n 19 |     if (flag == 1)\n 20 |         printf(\"YES\\n\");\n 21 |     else\n 22 |         printf(\"NO\\n\");\n 23 | \n 24 |     return 0;\n 25 | }"
+ },
+ "response": "{\n  \"naming\": 3,\n  \"comments\": 1,\n  \"formatting\": 2,\n  \"structure\": 3,\n  \"score\": 9,\n  \"reasons\": [\"Descriptive variable names\", \"Single-letter loop counter\", \"Consistent indentation and spacing\"],\n  \"suggestions\": []\n}"
+}

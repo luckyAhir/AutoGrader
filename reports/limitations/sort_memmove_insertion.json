@@ -1,0 +1,784 @@
+{
+  "submission": "sort_memmove_insertion.c",
+  "submission_path": "docs/limitation_cases/sort_memmove_insertion.c",
+  "submission_sha256": "sha256:eed0f951c063394d6a50ad6a2a29afcca1146fe993f82357f6af5dbf14154731",
+  "problem": "sort_integers",
+  "rules_file": "problems/sort_integers/rules.json",
+  "rules_hash": "sha256:ad09f2c66f3177e21b3647f795d93f245d01726645f8f5567adc4d499144f37f",
+  "assets_hash": "sha256:56354130a28fbf76a340f5fcfae200e484e92a22a1a8cce172bd03586b131852",
+  "grade": 99.8,
+  "max_grade": 100,
+  "first_pass": {
+    "compiled": true,
+    "compile_command": "cc -O2 -Wall -Wextra -std=c11 sort_memmove_insertion.c -o prog -lm",
+    "compiler_warnings": 0,
+    "static_sanity": {
+      "has_main": true,
+      "reads_input": true,
+      "writes_output": true,
+      "main_has_return": true
+    },
+    "smoke_ok": true,
+    "suspected_infinite_loop": false,
+    "smoke_verdict": "OK",
+    "sample_output_matches": true,
+    "execution_ok": true
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "weight": 0.25,
+      "effective_weight": 0.25,
+      "score": 1.0,
+      "contribution": 25.0,
+      "status": "ok",
+      "summary": "10 of 10 tests pass",
+      "feedback": "10 of 10 tests pass.",
+      "evidence": {
+        "tests_passed": 10,
+        "tests_total": 10,
+        "verdicts": {
+          "AC": 10
+        },
+        "results": [
+          {
+            "test": "01",
+            "verdict": "AC"
+          },
+          {
+            "test": "02",
+            "verdict": "AC"
+          },
+          {
+            "test": "03",
+            "verdict": "AC"
+          },
+          {
+            "test": "04",
+            "verdict": "AC"
+          },
+          {
+            "test": "05",
+            "verdict": "AC"
+          },
+          {
+            "test": "06",
+            "verdict": "AC"
+          },
+          {
+            "test": "07",
+            "verdict": "AC"
+          },
+          {
+            "test": "08",
+            "verdict": "AC"
+          },
+          {
+            "test": "09",
+            "verdict": "AC"
+          },
+          {
+            "test": "10",
+            "verdict": "AC"
+          }
+        ],
+        "failing": []
+      },
+      "suggestions": []
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "status": "ok",
+      "summary": "no warnings",
+      "feedback": "Compiles cleanly with -Wall -Wextra -std=c11.",
+      "evidence": {
+        "command": "cc -O2 -Wall -Wextra -std=c11 sort_memmove_insertion.c",
+        "werror_requested": false,
+        "warnings": [],
+        "errors": []
+      },
+      "suggestions": []
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "status": "ok",
+      "summary": "functions small and simple; no static issues",
+      "feedback": "Structure is clean.",
+      "evidence": {
+        "functions": [
+          {
+            "name": "upper_bound",
+            "line": 11,
+            "nloc": 13,
+            "cyclomatic": 3,
+            "nesting": 2,
+            "params": 3,
+            "header_comment": true
+          },
+          {
+            "name": "insertion_sort",
+            "line": 26,
+            "nloc": 9,
+            "cyclomatic": 2,
+            "nesting": 1,
+            "params": 2,
+            "header_comment": true
+          },
+          {
+            "name": "print_values",
+            "line": 37,
+            "nloc": 7,
+            "cyclomatic": 3,
+            "nesting": 1,
+            "params": 2,
+            "header_comment": true
+          },
+          {
+            "name": "main",
+            "line": 45,
+            "nloc": 21,
+            "cyclomatic": 7,
+            "nesting": 2,
+            "params": 0,
+            "header_comment": true
+          }
+        ],
+        "limits": {
+          "max_cyclomatic": 10,
+          "max_function_length": 40,
+          "max_nesting": 3
+        },
+        "subscores": {
+          "cyclomatic": 1.0,
+          "length": 1.0,
+          "nesting": 1.0,
+          "documentation": 1.0,
+          "hygiene": 1.0
+        },
+        "issues": [],
+        "cppcheck": "not available"
+      },
+      "suggestions": []
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "status": "ok",
+      "summary": "4 functions; main holds 46% of statements",
+      "feedback": "3 helper function(s): upper_bound(), insertion_sort(), print_values().",
+      "evidence": {
+        "functions_defined": 4,
+        "expected_min": 3,
+        "functions": [
+          {
+            "name": "upper_bound",
+            "statements": 5,
+            "uses": []
+          },
+          {
+            "name": "insertion_sort",
+            "statements": 5,
+            "uses": [
+              "upper_bound"
+            ]
+          },
+          {
+            "name": "print_values",
+            "statements": 3,
+            "uses": []
+          },
+          {
+            "name": "main",
+            "statements": 11,
+            "uses": [
+              "insertion_sort",
+              "print_values"
+            ]
+          }
+        ],
+        "called_from_main": [
+          "insertion_sort",
+          "print_values",
+          "upper_bound"
+        ],
+        "unused_functions": [],
+        "main_statement_share": 0.4583,
+        "subscores": {
+          "count": 1.0,
+          "helpers_used": 1.0,
+          "main_share": 1.0
+        }
+      },
+      "suggestions": []
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.15,
+      "effective_weight": 0.15,
+      "score": 1.0,
+      "contribution": 15.0,
+      "status": "ok",
+      "summary": "all 32 edge cases pass",
+      "feedback": "Handles every generated edge case (empty, single, negatives, duplicates, sorted, reverse_sorted, int_overflow, whitespace, random).",
+      "evidence": {
+        "categories": {
+          "empty": {
+            "cases": 1,
+            "passed": 1
+          },
+          "single": {
+            "cases": 2,
+            "passed": 2
+          },
+          "negatives": {
+            "cases": 3,
+            "passed": 3
+          },
+          "duplicates": {
+            "cases": 3,
+            "passed": 3
+          },
+          "sorted": {
+            "cases": 2,
+            "passed": 2
+          },
+          "reverse_sorted": {
+            "cases": 2,
+            "passed": 2
+          },
+          "int_overflow": {
+            "cases": 5,
+            "passed": 5
+          },
+          "whitespace": {
+            "cases": 6,
+            "passed": 6
+          },
+          "random": {
+            "cases": 8,
+            "passed": 8
+          }
+        },
+        "oracle": "reference solution"
+      },
+      "suggestions": []
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.15,
+      "effective_weight": 0.15,
+      "score": 1.0,
+      "contribution": 15.0,
+      "status": "ok",
+      "summary": "O(n log n) confirmed",
+      "feedback": "Measured growth O(n log n); required O(n log n). At n = 8000 it executes 1.2x the reference's line count.",
+      "evidence": {
+        "method": "gcov line counts",
+        "required": "O(n log n)",
+        "sizes": [
+          500,
+          1000,
+          2000,
+          4000,
+          8000
+        ],
+        "measurements": [
+          {
+            "n": 500,
+            "ops": 21659
+          },
+          {
+            "n": 1000,
+            "ops": 47351
+          },
+          {
+            "n": 2000,
+            "ops": 102635
+          },
+          {
+            "n": 4000,
+            "ops": 221287
+          },
+          {
+            "n": 8000,
+            "ops": 474615
+          }
+        ],
+        "fit": {
+          "estimate": "O(n log n)",
+          "errors": {
+            "O(log n)": 1.377992,
+            "O(n)": 0.123205,
+            "O(n log n)": 0.017729,
+            "O(n^2)": 0.83407,
+            "O(n^3)": 1.282732
+          },
+          "loglog_slope": 1.101
+        },
+        "estimated": "O(n log n)",
+        "reference_ops": [
+          {
+            "n": 500,
+            "ops": 17438
+          },
+          {
+            "n": 1000,
+            "ops": 38810
+          },
+          {
+            "n": 2000,
+            "ops": 85670
+          },
+          {
+            "n": 4000,
+            "ops": 187206
+          },
+          {
+            "n": 8000,
+            "ops": 406694
+          }
+        ],
+        "ops_ratio_vs_reference_at_max_n": 1.17,
+        "hot_lines": [
+          {
+            "line": 14,
+            "count": 100651,
+            "share": 0.2121,
+            "code": "while (low < high) {"
+          },
+          {
+            "line": 15,
+            "count": 92652,
+            "share": 0.1952,
+            "code": "size_t mid = low + (high - low) / 2;"
+          },
+          {
+            "line": 16,
+            "count": 92652,
+            "share": 0.1952,
+            "code": "if (sorted[mid] <= key) {"
+          }
+        ]
+      },
+      "suggestions": []
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.1,
+      "effective_weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "status": "ok",
+      "summary": "ASan/UBSan clean",
+      "feedback": "No memory errors, leaks or undefined behaviour detected by ASan/UBSan on 15 run(s).",
+      "evidence": {
+        "backend": "asan",
+        "flags": "-fsanitize=address,undefined",
+        "runs": 15,
+        "findings": []
+      },
+      "suggestions": []
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 0.95,
+      "contribution": 4.75,
+      "status": "ok",
+      "summary": "Variable names are not descriptive, Comments are clear and relevant, Formatting is consistent and readable",
+      "feedback": "Variable names are not descriptive; Comments are clear and relevant; Formatting is consistent and readable; Functions are short and focused.",
+      "evidence": {
+        "mode": "hybrid",
+        "heuristic": {
+          "score": 1.0,
+          "subscores": {
+            "naming": 1.0,
+            "comments": 1.0,
+            "formatting": 1.0,
+            "clarity": 1.0
+          },
+          "weights": {
+            "naming": 0.3,
+            "comments": 0.25,
+            "formatting": 0.25,
+            "clarity": 0.2
+          },
+          "details": {
+            "naming": {
+              "declared_names": 20,
+              "descriptive": 20,
+              "terse": []
+            },
+            "comments": {
+              "comment_lines": 8,
+              "code_lines": 50,
+              "ratio": 0.16,
+              "target_ratio": 0.15,
+              "header_comment": true
+            },
+            "formatting": {
+              "operators_spaced": "32/32",
+              "commas_followed_by_space": "14/14",
+              "long_lines": 0,
+              "indented_block_lines": 1.0,
+              "mixed_tabs_spaces": false,
+              "lines_with_several_statements": 0
+            },
+            "clarity": {
+              "magic_numbers": [],
+              "count": 0
+            }
+          }
+        },
+        "llm": {
+          "provider": "ollama",
+          "model": "qwen2.5-coder:7b",
+          "temperature": 0.0,
+          "seed": 42,
+          "cached": true,
+          "cache_key": "d4a2c8da768c8eda",
+          "raw_response": "{\n  \"naming\": 2,\n  \"comments\": 2,\n  \"formatting\": 2,\n  \"structure\": 3,\n  \"score\": 9,\n  \"reasons\": [\n    \"Variable names are not descriptive.\",\n    \"Comments are clear and relevant.\",\n    \"Formatting is consistent and readable.\",\n    \"Functions are short and focused.\"\n  ],\n  \"suggestions\": [\n    \"Rename variables to be more descriptive.\",\n    \"Consider using a more efficient sorting algorithm for large inputs.\"\n  ]\n}"
+        },
+        "formula": "hybrid: 0.5 x llm (9.0/10) + 0.5 x heuristic (10.0/10)"
+      },
+      "suggestions": [
+        "Rename variables to be more descriptive.",
+        "Consider using a more efficient sorting algorithm for large inputs."
+      ]
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "status": "ok",
+      "summary": "max similarity 0.34, not flagged",
+      "feedback": "No suspicious overlap (max similarity 0.34 with sort_merge_copy.c).",
+      "evidence": {
+        "max_similarity": 0.3385,
+        "flag_threshold": 0.85,
+        "min_shared": 8,
+        "distinctive_fingerprints": 65,
+        "boilerplate_removed": 52,
+        "corpus_files": 6,
+        "known_sources": 2,
+        "corpus_hash": "sha256:db856046b0616c6746561ca9f11e295f210fd2997e334ceaecbbd9d8677f73c9",
+        "top_matches": [
+          {
+            "kind": "peer",
+            "file": "sort_merge_copy.c",
+            "similarity": 0.3385,
+            "shared_fingerprints": 22,
+            "token_sequence_ratio": 0.3505,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                11,
+                23
+              ],
+              [
+                26,
+                30
+              ],
+              [
+                33,
+                34
+              ],
+              [
+                37,
+                39
+              ],
+              [
+                61,
+                62
+              ]
+            ],
+            "their_lines": [
+              [
+                4,
+                6
+              ],
+              [
+                19,
+                19
+              ],
+              [
+                23,
+                36
+              ],
+              [
+                47,
+                50
+              ],
+              [
+                55,
+                58
+              ],
+              [
+                70,
+                70
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "sort_merge.c",
+            "similarity": 0.3231,
+            "shared_fingerprints": 21,
+            "token_sequence_ratio": 0.5421,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                11,
+                23
+              ],
+              [
+                26,
+                30
+              ],
+              [
+                33,
+                34
+              ],
+              [
+                37,
+                39
+              ],
+              [
+                42,
+                45
+              ],
+              [
+                61,
+                62
+              ]
+            ],
+            "their_lines": [
+              [
+                10,
+                18
+              ],
+              [
+                29,
+                30
+              ],
+              [
+                33,
+                33
+              ],
+              [
+                38,
+                41
+              ],
+              [
+                52,
+                52
+              ],
+              [
+                56,
+                59
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "sort_bubble.c",
+            "similarity": 0.1053,
+            "shared_fingerprints": 4,
+            "token_sequence_ratio": 0.6352,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                26,
+                26
+              ],
+              [
+                31,
+                31
+              ],
+              [
+                58,
+                61
+              ]
+            ],
+            "their_lines": [
+              [
+                14,
+                14
+              ],
+              [
+                19,
+                20
+              ],
+              [
+                44,
+                47
+              ]
+            ]
+          },
+          {
+            "kind": "peer",
+            "file": "sort_selection_leak.c",
+            "similarity": 0.0667,
+            "shared_fingerprints": 3,
+            "token_sequence_ratio": 0.3315,
+            "identical_tokens": false,
+            "your_lines": [
+              [
+                17,
+                17
+              ],
+              [
+                29,
+                29
+              ],
+              [
+                32,
+                32
+              ]
+            ],
+            "their_lines": [
+              [
+                14,
+                16
+              ]
+            ]
+          },
+          {
+            "kind": "known_source",
+            "file": "llm_qwen2_5_coder_7b_seed1.c",
+            "similarity": 0.0,
+            "shared_fingerprints": 0,
+            "token_sequence_ratio": 0.4204,
+            "identical_tokens": false,
+            "your_lines": [],
+            "their_lines": []
+          }
+        ],
+        "llm_style": {
+          "score": 0.0,
+          "comments": 4,
+          "matching_comments": 0,
+          "examples": []
+        }
+      },
+      "suggestions": []
+    },
+    {
+      "name": "forbidden",
+      "analyzer": "forbidden_constructs",
+      "weight": 0.05,
+      "effective_weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "status": "ok",
+      "summary": "none used",
+      "feedback": "No forbidden constructs.",
+      "evidence": {
+        "violations": [],
+        "forbidden_calls": [
+          "gets",
+          "system"
+        ],
+        "forbidden_headers": [],
+        "forbidden_keywords": [
+          "goto"
+        ],
+        "required_calls": []
+      },
+      "suggestions": []
+    }
+  ],
+  "counterexamples": [],
+  "flags": [],
+  "suggestions": [
+    {
+      "metric": "readability",
+      "points_at_stake": 0.25,
+      "suggestion": "Rename variables to be more descriptive."
+    },
+    {
+      "metric": "readability",
+      "points_at_stake": 0.25,
+      "suggestion": "Consider using a more efficient sorting algorithm for large inputs."
+    }
+  ],
+  "usefulness_limitations": {
+    "usefulness": [
+      {
+        "use_case": "Grading programming labs at scale (CS1/CS2 courses)",
+        "example": "300 students submit 'sort n integers'. The agent grades all of them overnight under identical limits. A student whose bubble sort times out on n = 100000 receives the failing input size, the measured O(n^2) growth curve and the hottest loop line, instead of a bare 'time limit exceeded'.",
+        "benefit": "Consistent, explainable grades in minutes; teaching assistants only look at flagged or borderline submissions."
+      },
+      {
+        "use_case": "Coding-interview and hiring screens",
+        "example": "A company runs 500 candidate submissions for an 'add two integers safely' task. The agent ranks them by correctness, overflow handling and memory safety, and every rejection is backed by a concrete failing input such as '2147483647 1'.",
+        "benefit": "Fast first-round filtering where every decision can be justified metric by metric."
+      },
+      {
+        "use_case": "Plagiarism and LLM-copy triage",
+        "example": "Two submissions reach a similarity of 0.93 (threshold 0.85) even though every variable was renamed and every comment rewritten. The agent flags the pair with the matching line ranges, so the instructor inspects 2 files instead of 300. A third submission matches a solution generated by an LLM for the same statement and is flagged as a suspected LLM copy.",
+        "benefit": "Review time goes only to suspicious cases, and the evidence (lines, similarity) is already prepared."
+      },
+      {
+        "use_case": "Self-check before the deadline / continuous integration for assignments",
+        "example": "A student's qsort solution passes the visible sample, but the agent's generated boundary case '2 / 0 -2147483648' shows that the comparator 'return a - b' overflows. The minimized counterexample and the suggested fix arrive before the student submits.",
+        "benefit": "Finds bugs that fixed test suites miss and teaches with the smallest input that breaks the program."
+      }
+    ],
+    "limitations": [
+      {
+        "limitation": "Testing cannot prove correctness",
+        "example": "add_magic_value.c prints 0 whenever the first number is 4242. It passes 10/10 hidden tests and all 18 generated edge cases and is graded 97.9/100, because neither the tests nor the generators happen to produce 4242.",
+        "mitigation": "Larger random budgets and instructor-specified 'must-test' values reduce the risk but never remove it; suspicious special-casing still needs a human reader."
+      },
+      {
+        "limitation": "Complexity is estimated from measured operation counts, not proven",
+        "example": "sort_memmove_insertion.c finds each insertion point by binary search and shifts with memmove(). Its O(n^2) work happens inside libc, which gcov does not instrument, so the executed-line count grows like n log n, the agent reports 'O(n log n) confirmed' and grades it 99.8/100. Likewise a quicksort with a first-element pivot is O(n log n) on the random inputs used for measuring, but O(n^2) on sorted input.",
+        "mitigation": "Include adversarial (sorted) inputs and a large hidden test that only an efficient solution passes within the time limit."
+      },
+      {
+        "limitation": "Similarity-based copy detection has false positives and false negatives",
+        "example": "For 'add two integers', two honest solutions are almost the same token stream; the agent avoids flagging them only because of reference-code subtraction and the minimum-shared-fingerprints rule. Conversely, a student who takes an LLM answer and rewrites loops (for -> while), splits functions and reorders statements drops below 0.85 and is not flagged. When a pair is flagged, both students are flagged: the agent cannot tell who copied whom.",
+        "mitigation": "Flags are review signals, never automatic verdicts; the instructor decides after reading the matched lines."
+      },
+      {
+        "limitation": "Verdicts depend on the platform and on external models",
+        "example": "On Windows (MinGW) `long` is 32 bits, so a solution that sums into `long` overflows and fails tests that pass on Linux; ASan is unavailable there, so memory_safety falls back to UBSan trap mode and a leaking program loses no points. The LLM readability score can also change after `ollama pull` updates the model weights, and a program running at 0.95-1.05 s CPU can flip between AC and TLE across machines.",
+        "mitigation": "Run official grading in the provided Linux/Docker image, keep the LLM response cache with the course records, and keep the hidden tests far from the time limit; every report records tool versions and hashes."
+      }
+    ]
+  },
+  "tool_versions": {
+    "gcc": "15.2.0",
+    "gcov": "15.2.0",
+    "cppcheck": null,
+    "valgrind": null,
+    "python": "3.14.4",
+    "platform": "linux"
+  },
+  "agent_version": "1.0.0",
+  "grade_fingerprint": "sha256:ecc0125b48b46f16de9007dbadaaa4c86c58d172f14aaccc29bbc207c206a6df"
+}

@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You are a strict teaching assistant who grades the READABILITY of student C programs.\nDo NOT judge correctness or efficiency. Score with this rubric (integers):\n- naming (0-3): descriptive variable/function names; single letters only for loop counters\n- comments (0-2): a header/purpose comment and comments on non-obvious steps\n- formatting (0-2): consistent indentation, spaces around operators and after commas, one statement per line\n- structure (0-3): short focused functions, no magic numbers, clear control flow\nscore = naming + comments + formatting + structure (0-10). A cramped program with one-letter names and no\ncomments must not score above 5.\nReply with ONLY a JSON object:\n{\"naming\": int, \"comments\": int, \"formatting\": int, \"structure\": int, \"score\": int,\n \"reasons\": [up to 4 short strings], \"suggestions\": [up to 3 short, concrete strings]}",
+  "user": "Problem statement:\n# String Palindrome Check\n\nGiven a string, check whether it is a palindrome. A palindrome reads the same forward and backward.\n\nPrint `YES` if the string is a palindrome; otherwise, print `NO`.\n\n### Input Format\nA single string containing lowercase English letters.\n\n### Output Format\nPrint `YES` or `NO`.\n\n### Constraints\n- 1 ≤ length of string ≤ 100000\n- String contains only lowercase English letters.\n\n### Sample Input\n```text\nmadam\n```\n\n### Sample Output\n```text\nYES\n```\n\nStudent file palindrome1.c:\n  1 | \n  2 | #include <stdio.h>\n  3 | #include <string.h>\n  4 | \n  5 | int main()\n  6 | {\n  7 |     char str[1000];\n  8 |     int i, j;\n  9 |     int flag = 1;\n 10 | \n 11 |     scanf(\"%s\", str);\n 12 | \n 13 |     j = strlen(str) - 1;\n 14 | \n 15 |     for(i = 0; i < j; i++)\n 16 |     {\n 17 |         if(str[i] != str[j])\n 18 |         {\n 19 |             flag = 0;\n 20 |             break;\n 21 |         }\n 22 | \n 23 |         j--;\n 24 |     }\n 25 | \n 26 |     if(flag == 1)\n 27 |     {\n 28 |         printf(\"YES\\n\");\n 29 |     }\n 30 |     else\n 31 |     {\n 32 |         printf(\"NO\\n\");\n 33 |     }\n 34 | \n 35 |     return 0;\n 36 | }\n 37 | "
+ },
+ "response": "{\n  \"naming\": 0,\n  \"comments\": 0,\n  \"formatting\": 2,\n  \"structure\": 3,\n  \"score\": 8,\n  \"reasons\": [\"Single-letter variable names\", \"No comments\"],\n  \"suggestions\": [\"Use descriptive variable names\", \"Add comments explaining the logic\"]\n}"
+}

@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You are a strict teaching assistant who grades the READABILITY of student C programs.\nDo NOT judge correctness or efficiency. Score with this rubric (integers):\n- naming (0-3): descriptive variable/function names; single letters only for loop counters\n- comments (0-2): a header/purpose comment and comments on non-obvious steps\n- formatting (0-2): consistent indentation, spaces around operators and after commas, one statement per line\n- structure (0-3): short focused functions, no magic numbers, clear control flow\nscore = naming + comments + formatting + structure (0-10). A cramped program with one-letter names and no\ncomments must not score above 5.\nReply with ONLY a JSON object:\n{\"naming\": int, \"comments\": int, \"formatting\": int, \"structure\": int, \"score\": int,\n \"reasons\": [up to 4 short strings], \"suggestions\": [up to 3 short, concrete strings]}",
+  "user": "Problem statement:\nRead two integers on a single line separated by whitespace and print their sum followed by a newline.\n\nEach integer fits in a signed 32-bit int (-2147483648 .. 2147483647). The sum may not.\n\nSample input:\n7 5\n\nSample output:\n12\n\nStudent file add_infinite_loop.c:\n  1 | #include <stdio.h>\n  2 | \n  3 | /* Adds up all the numbers given on the input. */\n  4 | int main(void)\n  5 | {\n  6 |     int value;\n  7 |     long long total = 0;\n  8 | \n  9 |     while (scanf(\"%d\", &value) != 0) {\n 10 |         total += value;\n 11 |     }\n 12 |     printf(\"%lld\\n\", total);\n 13 |     return 0;\n 14 | }\n 15 | "
+ },
+ "response": "{\n  \"naming\": 0,\n  \"comments\": 1,\n  \"formatting\": 1,\n  \"structure\": 3,\n  \"score\": 6,\n  \"reasons\": [\"Single-letter variable names\", \"Lack of comments\"],\n  \"suggestions\": [\"Use descriptive variable names\", \"Add a comment explaining the purpose of the loop\"]\n}"
+}

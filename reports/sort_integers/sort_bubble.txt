@@ -1,0 +1,134 @@
+===== Grading report for sort_bubble.c =====
+Overall grade: 89.5 / 100
+Problem: sort_integers    Rules: problems/sort_integers/rules.json (sha256:ad09f2c66f31...)
+First pass: compiled=yes  smoke run=OK  suspected_infinite_loop=no
+
+Metric         Weight        Score  Contribution  Verdict
+correctness        25      22.5/25          22.5  9 of 10 tests pass
+syntax              5          5/5           5.0  no warnings
+structure          10        10/10          10.0  functions small and simple; no static issues
+modularity          5          5/5           5.0  3 functions; main holds 59% of statements
+logical            15        15/15          15.0  all 32 edge cases pass
+complexity         15       7.5/15           7.5  O(n^2), required O(n log n)
+memory_safety      10        10/10          10.0  ASan/UBSan clean
+readability         5        4.5/5           4.5  Variable names are descriptive, Header and purpose comment...
+originality         5          5/5           5.0  max similarity 0.17, not flagged
+forbidden           5          5/5           5.0  none used
+
+--- Where you failed ---
+Test 10  (TLE)
+    INPUT:    100000 \n 254079307 -1683387129 -345591591 2098095247 1762916570 -6817569 ... (1,098,971 chars in file)
+    EXPECTED: -2147478595 -2147405316 -2147375106 -2147070993 -2147070092 -214704408 ... (1,098,964 chars in file)
+    GOT:      (CPU time limit exceeded (1 s))
+    WHY:      The program exceeded the 1 s CPU limit on a large input (n = 100000): the
+              algorithm is too slow for the problem's constraints.
+    FIX:      Use an asymptotically faster algorithm (see the complexity metric for the
+              measured growth rate and the hottest lines).
+    reproduce: ./prog < sort_bubble_counterexamples/CE-01.in
+
+--- Complexity & profile (gcov operation counts) ---
+  n:          500        1000        2000        4000        8000
+  ops:     686495     2727463    11060460    44154521   176753364
+  ref:      17438       38810       85670      187206      406694
+  estimated O(n^2) (required O(n log n)); log-log slope 2.001
+  hot line  18:   32,002,289 executions (18%)  for (int i = 0; i < count - 1 - pass; i++) {
+  hot line  19:   31,994,347 executions (18%)  if (values[i] > values[i + 1]) {
+  hot line   6:   16,100,127 executions (9%)  static void swap(int *first, int *second)
+
+--- Feedback by metric ---
+  correctness    9 of 10 tests pass. Fails on test 10 (input 100000 \n 254079307 -1683387129
+                 -3455915... (1098971 chars)): The program exceeded the 1 s CPU limit on a
+                 large input (n = 100000): the algorithm is too slow for the problem's
+                 constraints.
+  syntax         Compiles cleanly with -Wall -Wextra -std=c11.
+  structure      Structure is clean.
+  modularity     2 helper function(s): swap(), bubble_sort().
+  logical        Handles every generated edge case (empty, single, negatives, duplicates,
+                 sorted, reverse_sorted, int_overflow, whitespace, random).
+  complexity     Measured growth O(n^2) but the problem requires O(n log n). Hottest line 18
+                 (`for (int i = 0; i < count - 1 - pass; i++) {`) runs 32,002,289 times at n
+                 = 8000 (18% of executed lines). At n = 8000 it executes 434.6x the
+                 reference's line count.
+  memory_safety  No memory errors, leaks or undefined behaviour detected by ASan/UBSan on 15
+                 run(s).
+  readability    Variable names are descriptive; Header and purpose comment is present;
+                 Consistent indentation and spacing; Functions are short and focused.
+  originality    No suspicious overlap (max similarity 0.17 with sort_merge_copy.c).
+  forbidden      No forbidden constructs.
+
+--- Suggestions to raise the grade (most points first) ---
+  - Replace the O(n^2) part of the algorithm with an O(n log n) approach (start with line
+    18). [complexity, up to 7.5 pts]
+  - Use an asymptotically faster algorithm (see the complexity metric for the measured
+    growth rate and the hottest lines). [correctness, up to 2.5 pts]
+  - Consider using a more efficient sorting algorithm for large n. [readability, up to 0.5
+    pts]
+
+--- Usefulness & limitations of this evaluation ---
+Useful for:
+  1. Grading programming labs at scale (CS1/CS2 courses)
+     Example: 300 students submit 'sort n integers'. The agent grades all of them overnight
+     under identical limits. A student whose bubble sort times out on n = 100000 receives
+     the failing input size, the measured O(n^2) growth curve and the hottest loop line,
+     instead of a bare 'time limit exceeded'.
+     Benefit: Consistent, explainable grades in minutes; teaching assistants only look at
+     flagged or borderline submissions.
+  2. Coding-interview and hiring screens
+     Example: A company runs 500 candidate submissions for an 'add two integers safely'
+     task. The agent ranks them by correctness, overflow handling and memory safety, and
+     every rejection is backed by a concrete failing input such as '2147483647 1'.
+     Benefit: Fast first-round filtering where every decision can be justified metric by
+     metric.
+  3. Plagiarism and LLM-copy triage
+     Example: Two submissions reach a similarity of 0.93 (threshold 0.85) even though every
+     variable was renamed and every comment rewritten. The agent flags the pair with the
+     matching line ranges, so the instructor inspects 2 files instead of 300. A third
+     submission matches a solution generated by an LLM for the same statement and is flagged
+     as a suspected LLM copy.
+     Benefit: Review time goes only to suspicious cases, and the evidence (lines,
+     similarity) is already prepared.
+  4. Self-check before the deadline / continuous integration for assignments
+     Example: A student's qsort solution passes the visible sample, but the agent's
+     generated boundary case '2 / 0 -2147483648' shows that the comparator 'return a - b'
+     overflows. The minimized counterexample and the suggested fix arrive before the student
+     submits.
+     Benefit: Finds bugs that fixed test suites miss and teaches with the smallest input
+     that breaks the program.
+Limits of this report:
+  1. Testing cannot prove correctness
+     Example: add_magic_value.c prints 0 whenever the first number is 4242. It passes 10/10
+     hidden tests and all 18 generated edge cases and is graded 97.9/100, because neither
+     the tests nor the generators happen to produce 4242.
+     Mitigation: Larger random budgets and instructor-specified 'must-test' values reduce
+     the risk but never remove it; suspicious special-casing still needs a human reader.
+  2. Complexity is estimated from measured operation counts, not proven
+     Example: sort_memmove_insertion.c finds each insertion point by binary search and
+     shifts with memmove(). Its O(n^2) work happens inside libc, which gcov does not
+     instrument, so the executed-line count grows like n log n, the agent reports 'O(n log
+     n) confirmed' and grades it 99.8/100. Likewise a quicksort with a first-element pivot
+     is O(n log n) on the random inputs used for measuring, but O(n^2) on sorted input.
+     Mitigation: Include adversarial (sorted) inputs and a large hidden test that only an
+     efficient solution passes within the time limit.
+  3. Similarity-based copy detection has false positives and false negatives
+     Example: For 'add two integers', two honest solutions are almost the same token stream;
+     the agent avoids flagging them only because of reference-code subtraction and the
+     minimum-shared-fingerprints rule. Conversely, a student who takes an LLM answer and
+     rewrites loops (for -> while), splits functions and reorders statements drops below
+     0.85 and is not flagged. When a pair is flagged, both students are flagged: the agent
+     cannot tell who copied whom.
+     Mitigation: Flags are review signals, never automatic verdicts; the instructor decides
+     after reading the matched lines.
+  4. Verdicts depend on the platform and on external models
+     Example: On Windows (MinGW) `long` is 32 bits, so a solution that sums into `long`
+     overflows and fails tests that pass on Linux; ASan is unavailable there, so
+     memory_safety falls back to UBSan trap mode and a leaking program loses no points. The
+     LLM readability score can also change after `ollama pull` updates the model weights,
+     and a program running at 0.95-1.05 s CPU can flip between AC and TLE across machines.
+     Mitigation: Run official grading in the provided Linux/Docker image, keep the LLM
+     response cache with the course records, and keep the hidden tests far from the time
+     limit; every report records tool versions and hashes.
+
+--- Reproducibility ---
+  submission sha256:265667b29d2d36e1...  rules sha256:ad09f2c66f3177e2...
+  assets sha256:56354130a28fbf76a340...  grade fingerprint sha256:dc90496a6b497a91...
+  tools: gcc 15.2.0, gcov 15.2.0, python 3.14.4, platform linux

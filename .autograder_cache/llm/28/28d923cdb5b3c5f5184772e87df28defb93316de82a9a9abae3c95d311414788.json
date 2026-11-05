@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You design hidden test cases for a programming exercise. Each test is an input and the exact\noutput a correct program prints for it.\nRules:\n- every input must follow the input format and satisfy every constraint in the problem statement exactly;\n- work out each expected output carefully, step by step, from the problem statement, and write the working\n  down before the output; the output must be exactly what a correct program prints (same format, same spacing,\n  one line per line of output);\n- every test must check a different situation; do not repeat the samples or the inputs already taken;\n- keep each input under 2000 characters.\nReply with ONLY a JSON object:\n{{\"tests\": [{{\"input\": \"<exact stdin text, \\n for newlines>\", \"working\": \"<the calculation, briefly>\", \"output\": \"<exact stdout text>\", \"purpose\": \"<what it checks, at most 12 words>\"}}]}}",
+  "user": "Problem statement:\nProblem: Matrix Addition\n\nGiven two matrices of dimensions n × m, add their corresponding elements and print the resulting matrix.\n\nInput:\n- First line contains two integers n and m.\n- Next n lines contain the elements of matrix A.\n- Next n lines contain the elements of matrix B.\nOutput:\n\nPrint the resulting matrix, with each element separated by a space.\n\nConstraints:\n- \\(1 \\le n,m \\le 100\\)\n- \\(-1000 \\le A[i][j], B[i][j] \\le 1000\\)\n\nSample 1 input:\n```\n2 2\n1 2\n3 4\n5 6\n7 8\n```\nSample 1 output:\n```\n6 8\n10 12\n```\n\nSample 2 input:\n```\n2 3\n1 0 -1\n2 3 4\n5 6 7\n8 9 10\n```\nSample 2 output:\n```\n6 6 6\n10 12 14\n```\n\nWrite 2 test cases that check: rectangular matrices.\nIf no valid input fits this situation, reply with an empty list.\nThese inputs are already taken:\n```\n1 1\n-5\n3\n```"
+ },
+ "response": "{\n  \"tests\": [\n    {\n      \"input\": \"4 3\\n1 2 3\\n4 5 6\\n7 8 9\\n10 11 12\\n2 3 4\\n5 6 7\\n8 9 10\",\n      \"working\": \"Add corresponding elements of the two matrices.\",\n      \"output\": \"13 15 18\\n19 22 25\\n31 34 37\\n43 46 49\",\n      \"purpose\": \"Check addition of larger rectangular matrices.\"\n    },\n    {\n      \"input\": \"3 2\\n-1 -2\\n0 1\\n2 3\\n-4 -5\\n6 7\\n8 9\",\n      \"working\": \"Add corresponding elements of the two matrices.\",\n      \"output\": \"-3 -3\\n1 2\\n10 12\",\n      \"purpose\": \"Check addition of smaller rectangular matrices.\"\n    }\n  ]\n}"
+}

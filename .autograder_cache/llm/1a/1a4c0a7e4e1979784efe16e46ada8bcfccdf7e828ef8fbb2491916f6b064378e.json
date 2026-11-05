@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 1042,
+  "json": true,
+  "system": "You are given a programming problem, worked examples and one input. Work out the exact output a\ncorrect program prints for that input. Reply with ONLY a JSON object: {\"output\": \"<exact stdout text>\"}",
+  "user": "Problem statement:\nProblem: Matrix Addition\n\nGiven two matrices of dimensions n × m, add their corresponding elements and print the resulting matrix.\n\nInput:\n- First line contains two integers n and m.\n- Next n lines contain the elements of matrix A.\n- Next n lines contain the elements of matrix B.\nOutput:\n\nPrint the resulting matrix, with each element separated by a space.\n\nConstraints:\n- \\(1 \\le n,m \\le 100\\)\n- \\(-1000 \\le A[i][j], B[i][j] \\le 1000\\)\n\nSample 1 input:\n```\n2 2\n1 2\n3 4\n5 6\n7 8\n```\nSample 1 output:\n```\n6 8\n10 12\n```\n\nSample 2 input:\n```\n2 3\n1 0 -1\n2 3 4\n5 6 7\n8 9 10\n```\nSample 2 output:\n```\n6 6 6\n10 12 14\n```\n\nInput:\n```\n3 2\n0 1\n2 3\n4 5\n0 6\n7 8\n```\nWhat is the exact output?"
+ },
+ "response": "{\"output\": \"6 7\\n8 9\\n12 13\"}"
+}

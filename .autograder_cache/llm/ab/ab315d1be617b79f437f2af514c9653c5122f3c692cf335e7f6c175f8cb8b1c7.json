@@ -1,0 +1,12 @@
+{
+ "request": {
+  "provider": "ollama",
+  "model": "qwen2.5-coder:3b",
+  "temperature": 0.0,
+  "seed": 42,
+  "json": true,
+  "system": "You describe the INPUT FORMAT of a programming problem as JSON, so a program can build inputs of\nany size. Reply with ONLY: {\"variables\": [...], \"layout\": [[...], ...]}\n- \"variables\": every value the program reads, in reading order. Each has \"name\", \"type\" (int, float, str or\n  char; add [] for a list, [][] for a matrix) and \"min\"/\"max\" from the constraints of the problem.\n- A list needs \"length\" (a number, or the name of an EARLIER variable that holds the count). A matrix needs\n  \"rows\" and \"cols\" the same way.\n- Mark the variable that sets the size of the input with \"role\": \"size\": the count of items, or the number\n  itself when the input is a single number.\n- \"layout\": one list of variable names per input line, in order.\nExample (n, then n integers):\n{\"variables\": [{\"name\": \"n\", \"type\": \"int\", \"min\": 1, \"max\": 100000, \"role\": \"size\"},\n{\"name\": \"a\", \"type\": \"int[]\", \"length\": \"n\", \"min\": -1000, \"max\": 1000}], \"layout\": [[\"n\"], [\"a\"]]}\nExample (a single number):\n{\"variables\": [{\"name\": \"n\", \"type\": \"int\", \"min\": 1, \"max\": 1000000000, \"role\": \"size\"}], \"layout\": [[\"n\"]]}",
+  "user": "Problem:\nProblem: Quick Sort\n\nGiven an array of n integers, sort the array in ascending order using the Quick Sort algorithm.\n\nInput: The first line contains an integer n. The second line contains n space-separated integers.\n\nOutput: Print the sorted array in ascending order, with elements separated by spaces.\n\nConstraints: 1 <= n <= 100000, -1000000000 <= A[i] <= 1000000000\n\nSample Input:\n5\n64 25 12 22 11\n\nSample Output:\n11 12 22 25 64\n\nSample 1 input:\n```\n5\n64 25 12 22 11\n```\nSample 1 output:\n```\n11 12 22 25 64\n```\nSample 2 input:\n```\n6\n9 3 7 1 8 2\n```\nSample 2 output:\n```\n1 2 3 7 8 9\n```\nSample 3 input:\n```\n5\n5 5 5 5 5\n```\nSample 3 output:\n```\n5 5 5 5 5\n```"
+ },
+ "response": "{\"variables\": [{\"name\": \"n\", \"type\": \"int\", \"min\": 1, \"max\": 100000, \"role\": \"size\"}, {\"name\": \"arr\", \"type\": \"int[]\", \"length\": \"n\", \"min\": -1000000000, \"max\": 1000000000}], \"layout\": [[\"n\"], [\"arr\"]]}"
+}
