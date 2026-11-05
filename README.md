@@ -24,6 +24,16 @@ No reference solution is needed. The sample tests in the rules are the ground tr
 
 ## Install
 
+## for linux:
+
+- You need to install Make, you can use "sudo apt-get install -y make" command for that.
+- Open terminal, go to auto grader folder using cd.
+- run "make setup". this will install all the required tools such as OLLAMA, gcc, python3 etc.
+- run "make check". this optional
+- run "make test".  this is also optional
+- run "make run".
+- after running make run your model is live and you can open it by clicking on the link you got in the terminal after running "make run".
+
 You need **Python 3.9+** and a **C compiler** (gcc or clang). There are no Python packages to install.
 
 Optional: `cppcheck`, `valgrind`, and [Ollama](https://ollama.com) for the AI parts.
@@ -104,3 +114,4 @@ python3 -m unittest discover -s tests -t .
 - A flag such as "possible copying" is a hint for the instructor, not a verdict.
 - Tests written by an AI model can still contain mistakes, so review the generated test files
   (`test_cases.json`, `edge_case.json`) before relying on a grade.
+
